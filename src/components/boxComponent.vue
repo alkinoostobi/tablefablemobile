@@ -4,8 +4,6 @@
     <inner-box-component :mode="'text'" :font-size="54" :position="'tl'" :text="'roo'"></inner-box-component>
     <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'"></inner-box-component>
     <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'"></inner-box-component>
-    <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'"></inner-box-component>
-    <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'" v-if="show_second"></inner-box-component>
     <inner-box-component :mode="'icon'" :icon-height="5" :icon-width="5" :position="'tr'" :icon="'sword'"></inner-box-component>
   </div>
 </template>

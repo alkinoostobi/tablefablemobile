@@ -6,8 +6,8 @@
          height: mode === 'text' ? 'min-content' : `${iconHeight}rem`,
          fontSize: `${fontSize}px`,
          transform: `translateY(${position === 'tr' || position === 'tl' ? '-50%' : '50%'})`,
-         left: position === 'bl' || position === 'tl' ? `calc(${this.$el && this.$el.previousSibling ? margin : 0}rem + ${calculateLeftPosition()}px)` : 'auto',
-         right: position === 'br' || position === 'tr' ? `calc(${this.$el && this.$el.previousSibling ? margin : 0}rem + ${calculateLeftPosition()}px)` : 'auto',
+         left: position === 'bl' || position === 'tl' ? `calc(${hasPrevElementWithPositionClass ? margin : 0}rem + ${calculateLeftPosition()}px)` : 'auto',
+         right: position === 'br' || position === 'tr' ? `calc(${hasPrevElementWithPositionClass ? margin : 0}rem + ${calculateLeftPosition()}px)` : 'auto',
        }">
     <template v-if="mode === 'text'">{{ text }}</template>
     <template v-else-if="mode === 'icon'">
@@ -15,7 +15,6 @@
     </template>
   </div>
 </template>
-
 <script>
 import { utilitiesStore } from "stores/utilities";
 
@@ -26,6 +25,13 @@ export default {
     return {
       utilities: utilities,
       margin: 5, // Adjust the margin as needed
+      hasPrevElementWithPositionClass: false,
+      positionTranslate : {
+        'tr' : 'top-right',
+        'tl' : 'top-left',
+        'bl' : 'bottom-left',
+        'br' : 'bottom-right'
+      }
     };
   },
   props: {
@@ -59,25 +65,39 @@ export default {
       default: 'tr',
     },
   },
+  watch: {
+    position(newPosition) {
+      // Watch for changes in the 'position' prop
+      this.updatePrevElementWithPositionClass();
+    },
+  },
   methods: {
+    updatePrevElementWithPositionClass() {
+      const el = this.$el || this.$el.querySelector('.inner-box');
+      this.hasPrevElementWithPositionClass = el && el.previousElementSibling && el.previousElementSibling.classList.contains(this.positionTranslate[this.position]);
+      console.log(this.hasPrevElementWithPositionClass)
+      },
     calculateLeftPosition() {
-      // Use $nextTick to ensure the component is fully rendered
       this.$nextTick(() => {
-        // Check if this.$el exists and has a previous sibling
-        if (this.$el && this.$el.previousSibling) {
-          // Adjust this method based on your specific use case
-          console.log(this.$el.previousSibling);
-          return this.margin + this.$el.previousSibling.offsetWidth;
-        } else {
-          // Provide a default width or fixed value
-          return 0; // You can adjust this value as needed
+        this.updatePrevElementWithPositionClass();
+        const el = this.$el || this.$el.querySelector('.inner-box');
+        if (el && el.previousElementSibling && this.hasPrevElementWithPositionClass) {
+          console.log('///////////////////////')
+          console.log(this.$el || this.$el.querySelector('.inner-box'))
+          console.log(`el ${this.margin} ${el.previousElementSibling.offsetWidth}`)
+          console.log('///////////////////////')
+          return this.margin + el.previousElementSibling.offsetWidth;
         }
+
+        return 0;
       });
     },
   },
+  mounted() {
+    this.updatePrevElementWithPositionClass();
+  },
 };
 </script>
-
 <style scoped>
 .bottom-left {
   bottom: 0;
