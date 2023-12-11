@@ -111,7 +111,7 @@ export default {
 
 .bottom-right {
   bottom: 0;
-  right: 0;
+  right: 0;`
 }
 
 .top-left {
