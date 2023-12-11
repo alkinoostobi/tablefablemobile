@@ -2,8 +2,9 @@
   <div class="outer-box">
   <inner-box-component :mode="'text'" :font-size="54" :position="'bl'"  :text="'goo'"></inner-box-component>
     <inner-box-component :mode="'text'" :font-size="54" :position="'tl'" :text="'roo'"></inner-box-component>
+    <inner-box-component :mode="'text'" :font-size="54" :position="'tl'" :text="'roo'"></inner-box-component>
     <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'"></inner-box-component>
-    <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'"></inner-box-component>
+    <inner-box-component :mode="'text'" :font-size="54" :position="'br'" :text="'soo'" backgroundcolor="#6E441D" bordercolor="#4C2B0D" borderwidth="1rem"></inner-box-component>
     <inner-box-component :mode="'icon'" :icon-height="5" :icon-width="5" :position="'tr'" :icon="'sword'"></inner-box-component>
   </div>
 </template>

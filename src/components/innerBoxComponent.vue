@@ -5,9 +5,13 @@
          width: mode === 'text' ? 'auto' : `${iconWidth}rem`,
          height: mode === 'text' ? 'min-content' : `${iconHeight}rem`,
          fontSize: `${fontSize}px`,
+         backgroundColor: backgroundcolor,
+         borderColor: bordercolor,
+          borderWidth: `${borderwidth}px`,
+          borderRadius: `${borderRadius}px`,
          transform: `translateY(${position === 'tr' || position === 'tl' ? '-50%' : '50%'})`,
-         left: position === 'bl' || position === 'tl' ? `calc(${hasPrevElementWithPositionClass ? margin : 0}rem + ${calculateLeftPosition()}px)` : 'auto',
-         right: position === 'br' || position === 'tr' ? `calc(${hasPrevElementWithPositionClass ? margin : 0}rem + ${calculateLeftPosition()}px)` : 'auto',
+         left: position === 'bl' || position === 'tl' ? `${hasPrevElementWithPositionClass ? margin + calculateLeftPosition() : calculateLeftPosition()}px` : 'auto',
+         right: position === 'br' || position === 'tr' ? `${hasPrevElementWithPositionClass ? margin + calculateLeftPosition() : calculateLeftPosition()}px` : 'auto',
        }">
     <template v-if="mode === 'text'">{{ text }}</template>
     <template v-else-if="mode === 'icon'">
@@ -24,14 +28,15 @@ export default {
   data() {
     return {
       utilities: utilities,
-      margin: 5, // Adjust the margin as needed
+      margin: 50, // Adjust the margin as needed
       hasPrevElementWithPositionClass: false,
       positionTranslate : {
         'tr' : 'top-right',
         'tl' : 'top-left',
         'bl' : 'bottom-left',
         'br' : 'bottom-right'
-      }
+      },
+      loaded : false,
     };
   },
   props: {
@@ -64,6 +69,22 @@ export default {
       type: String,
       default: 'tr',
     },
+    bordercolor: {
+      type: String,
+      default: '#000000',
+    },
+    borderwidth: {
+      type: Number,
+      default: 1,
+    },
+    backgroundcolor: {
+      type: String,
+      default: '#ffffff',
+    },
+    borderRadius: {
+      type: Number,
+      default: 100,
+    },
   },
   watch: {
     position(newPosition) {
@@ -78,22 +99,24 @@ export default {
       console.log(this.hasPrevElementWithPositionClass)
       },
     calculateLeftPosition() {
-      this.$nextTick(() => {
+      if(!this.loaded){
+        return 0;
+      }
         this.updatePrevElementWithPositionClass();
         const el = this.$el || this.$el.querySelector('.inner-box');
+
         if (el && el.previousElementSibling && this.hasPrevElementWithPositionClass) {
-          console.log('///////////////////////')
-          console.log(this.$el || this.$el.querySelector('.inner-box'))
-          console.log(`el ${this.margin} ${el.previousElementSibling.offsetWidth}`)
-          console.log('///////////////////////')
-          return this.margin + el.previousElementSibling.offsetWidth;
+          const margin = this.margin;
+          const previousElementWidth = el.previousElementSibling.offsetWidth;
+
+          return margin + previousElementWidth;
         }
 
         return 0;
-      });
-    },
+    }
   },
   mounted() {
+    this.loaded = true;
     this.updatePrevElementWithPositionClass();
   },
 };
@@ -111,7 +134,7 @@ export default {
 
 .bottom-right {
   bottom: 0;
-  right: 0;`
+  right: 0;
 }
 
 .top-left {
@@ -121,7 +144,6 @@ export default {
 
 .inner-box {
   position: absolute;
-  background-color: #3498db;
   font-size: 1rem;
   display: flex;
   align-items: center;
