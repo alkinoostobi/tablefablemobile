@@ -2,20 +2,21 @@
   <div class="inner-box"
        :class="{ 'top-right': position === 'tr', 'top-left': position === 'tl', 'bottom-left': position === 'bl', 'bottom-right': position === 'br' }"
        :style="{
-         width: mode === 'text' ? 'auto' : `${iconWidth}rem`,
-         height: mode === 'text' ? 'min-content' : `${iconHeight}rem`,
+         width: iconWidth === 0 ? 'auto' : `${iconWidth}rem`,
+         height: iconHeight === 0 ? 'min-content' : `${iconHeight}rem`,
          fontSize: `${fontSize}px`,
-         backgroundColor: backgroundcolor,
-         borderColor: bordercolor,
-          borderWidth: `${borderwidth}px`,
-          borderRadius: `${borderRadius}px`,
+          padding: `${padding}px`,
+         backgroundColor: backgroundcolor !== '' ? backgroundcolor : computedBackgroundColor,
+         borderRadius: borderRadius !== 0 ? `${borderRadius}rem` : `${computedBorderRadius}rem`,
+         outline: `${borderwidth !== 0 ? borderwidth : computedBorderWidth}px solid ${bordercolor !== '' ? bordercolor : computedBorderColor}`,
          transform: `translateY(${position === 'tr' || position === 'tl' ? '-50%' : '50%'})`,
          left: position === 'bl' || position === 'tl' ? `${hasPrevElementWithPositionClass ? margin + calculateLeftPosition() : calculateLeftPosition()}px` : 'auto',
          right: position === 'br' || position === 'tr' ? `${hasPrevElementWithPositionClass ? margin + calculateLeftPosition() : calculateLeftPosition()}px` : 'auto',
-       }">
-    <template v-if="mode === 'text'">{{ text }}</template>
+       }"
+       @click="emmit2parent()">
+    <template v-if="mode === 'text'"><span style="text-align: center;" :style="{lineHeight : iconHeight === 0 ? 'min-content' : `${iconHeight}rem`}">{{ text }}</span></template>
     <template v-else-if="mode === 'icon'">
-      <img :src="utilities.icons[icon]" alt="icon" style="max-width: 100%; max-height: 100%;">
+      <img :src="utilities.icons[iconOut]" alt="icon" style="max-width: 100%; max-height: 100%;">
     </template>
   </div>
 </template>
@@ -37,6 +38,8 @@ export default {
         'br' : 'bottom-right'
       },
       loaded : false,
+      clicked : false,
+      iconOut : '',
     };
   },
   props: {
@@ -47,7 +50,7 @@ export default {
     },
     text: {
       type: String,
-      default: 'asdasdasasdasdasdasdasd',
+      default: 'default',
     },
     icon: {
       type: String,
@@ -59,11 +62,15 @@ export default {
     },
     iconWidth: {
       type: Number,
-      default: 2,
+      default: 0,
     },
     iconHeight: {
       type: Number,
-      default: 2,
+      default: 0,
+    },
+    padding: {
+      type: Number,
+      default: 7,
     },
     position: {
       type: String,
@@ -71,25 +78,70 @@ export default {
     },
     bordercolor: {
       type: String,
-      default: '#000000',
+      default: '',
     },
     borderwidth: {
       type: Number,
-      default: 1,
+      default: 0,
     },
     backgroundcolor: {
       type: String,
-      default: '#ffffff',
+      default: '',
     },
     borderRadius: {
       type: Number,
-      default: 100,
+      default: 0,
+    },
+    textColor: {
+      type: String,
+      default: '',
+    },
+    iconAfterClick: {
+      type: String,
+      default: '',
     },
   },
   watch: {
     position(newPosition) {
       // Watch for changes in the 'position' prop
       this.updatePrevElementWithPositionClass();
+    },
+  },
+  computed :{
+    computedBorderColor() {
+      if (!this.loaded) return '#000000';
+
+      const parentElement = this.$el ? this.$el.parentElement : null;
+      const parentComputedStyle = parentElement ? window.getComputedStyle(parentElement) : null;
+      return parentComputedStyle ? parentComputedStyle.borderColor || '#000000' : '#000000';
+    },
+    computedBorderWidth() {
+      if (!this.loaded) return 1;
+
+      const parentElement = this.$el ? this.$el.parentElement : null;
+      const parentComputedStyle = parentElement ? window.getComputedStyle(parentElement) : null;
+      return parentComputedStyle ? parseInt(parentComputedStyle.borderWidth) || 1 : 1;
+    },
+    computedBackgroundColor() {
+      if (!this.loaded) return '#ffffff';
+
+      const parentElement = this.$el ? this.$el.parentElement : null;
+      const parentComputedStyle = parentElement ? window.getComputedStyle(parentElement) : null;
+      return parentComputedStyle ? parentComputedStyle.backgroundColor || '#ffffff' : '#ffffff';
+    },
+    computedBorderRadius() {
+      if (!this.loaded) return 100;
+
+      const parentElement = this.$el ? this.$el.parentElement : null;
+      const parentComputedStyle = parentElement ? window.getComputedStyle(parentElement) : null;
+      return parentComputedStyle ? parseInt(parentComputedStyle.borderRadius) || 100 : 100;
+    },
+    computedTextColor() {
+      if (!this.loaded) return '#000000';
+
+      const parentElement = this.$el ? this.$el.parentElement : null;
+      const parentComputedStyle = parentElement ? window.getComputedStyle(parentElement) : null;
+      return parentComputedStyle ? parentComputedStyle.color || '#000000' : '#000000';
     },
   },
   methods: {
@@ -113,10 +165,23 @@ export default {
         }
 
         return 0;
+    },
+    emmit2parent(){
+      if(this.iconAfterClick){
+        if(this.clicked){
+          this.iconOut = this.icon;
+          this.clicked = false;
+        }else{
+          this.iconOut = this.iconAfterClick;
+          this.clicked = true;
+        }
+      }
+      this.$emit('clicked')
     }
   },
   mounted() {
     this.loaded = true;
+    this.iconOut = this.icon;
     this.updatePrevElementWithPositionClass();
   },
 };
@@ -149,8 +214,8 @@ export default {
   align-items: center;
   justify-content: center;
   width: auto;
-  min-width: 2rem;
-  min-height: 2rem;
+  min-width: 0.5rem;
+  min-height: 0.5rem;
   transition: transform 0.3s ease;
 }
 </style>

@@ -1,1 +1,41 @@
 // app global css in SCSS form
+@font-face {
+  font-family: customfont;
+  src: url(../assets/fonts/Monocraft.ttf);
+}
+
+// declare a class which applies it
+body {
+  font-family: 'customfont';
+}
+
+.outer-box {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 1.25rem;
+  border: 8px solid #4C2B0D;
+  color : #F6C99C;
+  background: #6E441D;
+}
+.box_Title_centered{
+  position: absolute;
+  left: 50%;
+  top: 1rem;
+  transform: translate(-50%, -50%);
+  font-size : 1.1rem;
+}
+.box_Title_Left{
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  transform: translate(-50%, -50%);
+  font-size : 1.1rem;
+}
+.main_Stat_centered{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size : 4rem;
+}

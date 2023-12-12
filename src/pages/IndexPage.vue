@@ -1,16 +1,19 @@
 <template>
   <q-page class="flex flex-center">
-    <box-component></box-component>
+    <box-component v-if="false"></box-component>
+    <savesComponent></savesComponent>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import boxComponent from 'components/boxComponent.vue'
+import savesComponent from "components/savesComponent.vue";
 export default defineComponent({
   name: 'IndexPage',
   components: {
-    boxComponent
+    boxComponent,
+    savesComponent
   },
 })
 </script>
