@@ -48,6 +48,7 @@ export default {
 .box_Title_Left{
   position: absolute;
   top: 1rem;
+  left: 5rem;
   transform: translate(-50%, -50%);
   font-size : 1.1rem;
 }
