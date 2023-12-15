@@ -6,36 +6,67 @@
 
 // declare a class which applies it
 body {
+  background-color: #A77D57;
   font-family: 'customfont';
 }
 
 .outer-box {
+  margin: 0.5rem;
   position: relative;
-  width: 12rem;
-  height: 12rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 1.25rem;
   border: 8px solid #4C2B0D;
-  color : #F6C99C;
+  color: #F6C99C;
   background: #6E441D;
 }
-.box_Title_centered{
+
+.box_Title_centered {
   position: absolute;
   left: 50%;
   top: 1rem;
   transform: translate(-50%, -50%);
-  font-size : 1.1rem;
+  font-size: 1.1rem;
 }
-.box_Title_Left{
+
+.box_Title_Left {
   position: absolute;
   left: 1rem;
   top: 1rem;
   transform: translate(-50%, -50%);
-  font-size : 1.1rem;
+  font-size: 1.1rem;
 }
-.main_Stat_centered{
+
+.box_Title_Right {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+}
+
+.main_Stat_centered {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size : 4rem;
+  font-size: 4rem;
 }
+
+.Saving_first {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+
+
+}
+.Saving_second{
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+}
+

@@ -2,8 +2,8 @@
   <div class="outer-box">
     <p class="box_Title_Left">Constitution</p>
     <p class="main_Stat_centered">+1</p>
-    <inner-box-component :mode="'text'" :font-size="15" :position="'bl'" :icon-width="'7.5'" :icon-height="'2'" :text="'13'" ></inner-box-component>
-    <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'" :backgroundcolor="'#FC9538'" :icon="'die'" @clicked="test()" :icon-after-click="'shield'"></inner-box-component>
+    <inner-box-component :mode="'text'" :font-size="15" :position="'bl'" :icon-width='7.5' :icon-height='2' :text="'13'" ></inner-box-component>
+    <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'" :backgroundcolor="'#0a0808'" :icon="'die'" @clicked="test()" :icon-after-click="'shield'"></inner-box-component>
   </div>
 </template>
 
