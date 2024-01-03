@@ -59,8 +59,8 @@ export default defineComponent({
           'color': '#C01DFC',
         },
       },
-
     };
   },
+
 })
 </script>

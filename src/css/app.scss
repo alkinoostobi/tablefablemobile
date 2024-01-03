@@ -31,7 +31,7 @@ body {
 
 .box_Title_Left {
   position: absolute;
-  left: 1rem;
+  left: 30%;
   top: 1rem;
   transform: translate(-50%, -50%);
   font-size: 1.1rem;
@@ -69,4 +69,28 @@ body {
   transform: translate(-50%, -50%);
   font-size: 2rem;
 }
+
+.Item_desc{
+  position: absolute;
+  left: 35%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  font-size: 0.95rem;
+}
+
+.Story_desc{
+  position: absolute;
+  left: 35%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.95rem;
+}
+.image-container {
+  width: 300px;
+  height: 200px;
+  background-image: url('tablefablemobile/src/assets/Wom8mcO.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
 
