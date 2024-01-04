@@ -14,6 +14,7 @@
 import {defineComponent} from 'vue'
 import savesComponent from "components/savesComponent.vue";
 import boxComponentSavings from "components/boxComponentSavings.vue";
+import {Statstore} from "stores/stats";
 
 
 export default defineComponent({
@@ -26,33 +27,33 @@ export default defineComponent({
     return {
       show_second: false,
       savings: {
-        'fort': {
-          'name': 'FORTITUDE',
-          'skill': 1,
-          'prof': 2,
-          'score': 3,
-          'proftrain': 'UNTRAINED',
-          'profcolor': '#0C6915',
-          'diecolor': '#023669'
+        fort: {
+          name: 'FORTITUDE',
+          skill: 1,
+          prof: 2,
+          score: 3,
+          proftrain: 'UNTRAINED',
+          profcolor: '#0C6915',
+          diecolor: '#023669'
         },
-        'fart': {
-          'name': 'REFLEX',
-          'skill': 1,
-          'prof': 2,
-          'score': 3,
-          'proftrain': 'UNTRAINED',
-          'profcolor': '#0C6915',
-          'diecolor': '#023669'
+        fart: {
+          name: 'REFLEX',
+          skill: 1,
+          prof: 2,
+          score: 3,
+          proftrain: 'UNTRAINED',
+          profcolor: '#0C6915',
+          diecolor: '#023669'
         },
 
-        'fock': {
-          'name': 'WILL',
-          'skill': 1,
-          'prof': 2,
-          'score': 3,
-          'proftrain': 'MASTER',
-          'profcolor': '#602402',
-          'diecolor': '#023669'
+        fock: {
+          name: 'WILL',
+          skill: 1,
+          prof: 2,
+          score: 3,
+          proftrain: 'MASTER',
+          profcolor: '#602402',
+          diecolor: '#023669'
         },
       }
     };

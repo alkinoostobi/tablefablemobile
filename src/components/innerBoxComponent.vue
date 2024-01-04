@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       utilities: utilities,
-      margin: 50, // Adjust the margin as needed
       hasPrevElementWithPositionClass: false,
       positionTranslate : {
         'tr' : 'top-right',
@@ -51,6 +50,10 @@ export default {
     text: {
       type: String,
       default: 'default',
+    },
+    margin:{
+      type: Number,
+      default: 50,
     },
     icon: {
       type: String,
