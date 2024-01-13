@@ -30,7 +30,7 @@ export default defineComponent({
       show_second: false,
       chars: {
         char1: {
-          name: "ZASALAMPOUSTIS",
+          name: 'default',
           more: 'READ MORE',
           str: 0,
           dex: 0,
@@ -44,7 +44,7 @@ export default defineComponent({
           aclass: 10,
         },
         char2: {
-          name: "MBUSSY",
+          name: 'default',
           more: 'READ MORE',
           str: 0,
           dex: 0,
@@ -63,25 +63,27 @@ export default defineComponent({
     };
   },
   mounted() {
+    this.chars.char1.name = this.stats.character1.name;
     this.chars.char1.str = this.stats.character1.modifiers.str;
     this.chars.char1.dex = this.stats.character1.modifiers.dex;
     this.chars.char1.con = this.stats.character1.modifiers.con;
     this.chars.char1.int = this.stats.character1.modifiers.int;
     this.chars.char1.wis = this.stats.character1.modifiers.wis;
     this.chars.char1.cha = this.stats.character1.modifiers.cha;
-    this.chars.char1.health = 10 + this.stats.character1.modifiers.con;
-    this.chars.char1.aclass = 10 + this.stats.character1.modifiers.dex;
+    this.chars.char1.health = this.stats.character1.defense.hp;
+    this.chars.char1.aclass = this.stats.character1.defense.ac
     this.chars.char1.hpcolor = this.utilities.colors.heal;
     this.chars.char1.accolor = this.utilities.colors.acla;
 
+    this.chars.char2.name = this.stats.character2.name;
     this.chars.char2.str = this.stats.character2.modifiers.str;
     this.chars.char2.dex = this.stats.character2.modifiers.dex;
     this.chars.char2.con = this.stats.character2.modifiers.con;
     this.chars.char2.int = this.stats.character2.modifiers.int;
     this.chars.char2.wis = this.stats.character2.modifiers.wis;
     this.chars.char2.cha = this.stats.character2.modifiers.cha;
-    this.chars.char2.health = 12 + this.stats.character2.modifiers.con;
-    this.chars.char2.aclass = 10 + this.stats.character2.modifiers.dex;
+    this.chars.char2.health = this.stats.character2.defense.hp
+    this.chars.char2.aclass = this.stats.character2.defense.ac
     this.chars.char2.hpcolor = this.utilities.colors.heal;
     this.chars.char2.accolor = this.utilities.colors.acla;
   }

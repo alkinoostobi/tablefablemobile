@@ -1,5 +1,9 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center" style="margin-top: 5rem;
+    display: flex;
+    row-gap: 3rem;
+    flex-wrap: wrap;
+    align-content: flex-start;">
     <box-component-equipments v-for="(equipment, equipmentindex) in equipments" :key="'equipmentindex'+equipmentindex"
                               :name="equipment.name" :more="equipment.more"
                               :num="equipment.num"
@@ -36,7 +40,7 @@ export default defineComponent({
           'color': '#0C6915',
           'image': utilitiesStore().icons.sword,
           'desc': "The rounded head of this flail is perforated with tiny holes, arranged in symbols and patterns. The flail",
-          'diecolor':'#FF5252',
+          'diecolor': '#FF5252',
         },
         'armor': {
           'name': 'Breastplate',
@@ -45,7 +49,7 @@ export default defineComponent({
           'color': '#323622',
           'image': utilitiesStore().icons.sword,
           'desc': "The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in",
-          'diecolor':'#FF5252',
+          'diecolor': '#FF5252',
         },
         'shield': {
           'name': 'Shield',
@@ -54,7 +58,7 @@ export default defineComponent({
           'color': '#323622',
           'image': utilitiesStore().icons.sword,
           'desc': "The rounded head of this flail is perforated with tiny holes, arranged in symbols and patterns. The flail",
-          'diecolor':'#FF5252',
+          'diecolor': '#FF5252',
         },
       },
     };

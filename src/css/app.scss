@@ -6,12 +6,11 @@
 
 // declare a class which applies it
 body {
-  background-color: #A77D57;
+  background-color: #4C2B0D;
   font-family: 'customfont';
 }
 
 .outer-box {
-  margin: 0.5rem;
   position: relative;
   width: 10rem;
   height: 10rem;
@@ -19,7 +18,10 @@ body {
   border: 8px solid #4C2B0D;
   color: #F6C99C;
   background: #6E441D;
+  margin-right: .75rem;
+  margin-left: 0.75rem;
 }
+
 
 .box_Title_centered {
   position: absolute;

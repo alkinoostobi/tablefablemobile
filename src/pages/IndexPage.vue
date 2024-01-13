@@ -1,5 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center" style="align-content: flex-start;
+    flex-direction: row; flex-wrap: wrap;row-gap: 2.5rem;
+    margin-top: 4rem">
     <box-component v-for="(stat, statindex) in stats" :key="'statindex'+statindex" :stat-modifier="stat.modifier"
                    :stat-name="stat.name" :stat-score="stat.score" :stat-color="stat.color"></box-component>
     <savesComponent v-if="false"></savesComponent>
@@ -10,8 +12,11 @@
 import {defineComponent} from 'vue'
 import boxComponent from 'components/boxComponent.vue'
 import savesComponent from "components/savesComponent.vue";
+import {Statstore} from "stores/stats";
+import {utilitiesStore} from "stores/utilities";
 
-
+const stat = Statstore();
+const util = utilitiesStore();
 export default defineComponent({
   name: 'IndexPage',
   components: {
@@ -23,44 +28,69 @@ export default defineComponent({
       show_second: false,
       stats: {
         'str': {
-          'name': 'Strength',
-          'score': 12,
-          'modifier': 1,
-          'color': '#FF5252'
+          'name': 'STRENGTH',
+          'score': 0,
+          'modifier': 0,
+          'color': 0,
         },
         'dex': {
           'name': 'DEXTERITY',
-          'score': 10,
+          'score': 0,
           'modifier': 0,
-          'color': '#39FFBD'
+          'color': 0
         },
         'con': {
           'name': 'CONSTITUTION',
-          'score': 14,
-          'modifier': 2,
-          'color': '#FC9538'
+          'score': 0,
+          'modifier': 0,
+          'color': 0
         },
         'int': {
           'name': 'INTELLIGENCE',
-          'score': 8,
-          'modifier': 1,
-          'color': '#F6C99C'
+          'score': 0,
+          'modifier': 0,
+          'color': 0,
         },
         'wis': {
           'name': 'WISDOM',
-          'score': 16,
-          'modifier': 3,
-          'color': '#5C5CFF'
+          'score': 0,
+          'modifier': 0,
+          'color': 0,
         },
         'cha': {
           'name': 'CHARISMA',
-          'score': 13,
-          'modifier': 1,
-          'color': '#C01DFC',
+          'score': 0,
+          'modifier': 0,
+          'color': 0,
         },
       },
+      stat: stat,
+      util: util,
     };
   },
+  mounted() {
+    this.stats.str.score = this.stat.character1.stats.str;
+    this.stats.dex.score = this.stat.character1.stats.dex;
+    this.stats.con.score = this.stat.character1.stats.con;
+    this.stats.int.score = this.stat.character1.stats.int;
+    this.stats.wis.score = this.stat.character1.stats.wis;
+    this.stats.cha.score = this.stat.character1.stats.cha;
 
+    this.stats.str.modifier = this.stat.character1.modifiers.str;
+    this.stats.dex.modifier = this.stat.character1.modifiers.dex;
+    this.stats.con.modifier = this.stat.character1.modifiers.con;
+    this.stats.int.modifier = this.stat.character1.modifiers.int;
+    this.stats.wis.modifier = this.stat.character1.modifiers.wis;
+    this.stats.cha.modifier = this.stat.character1.modifiers.cha;
+
+    this.stats.str.color = this.util.colors.str;
+    this.stats.dex.color = this.util.colors.dex;
+    this.stats.con.color = this.util.colors.con;
+    this.stats.int.color = this.util.colors.int;
+    this.stats.wis.color = this.util.colors.wis;
+    this.stats.cha.color = this.util.colors.cha;
+
+
+  }
 })
 </script>

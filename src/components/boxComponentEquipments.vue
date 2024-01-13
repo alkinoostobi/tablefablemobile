@@ -11,7 +11,7 @@
                          :text='more'></inner-box-component>
     <inner-box-component :mode="'icon'" :position="'br'" :icon-width="2" :icon-height="'2'" :backgroundcolor="diecolor"
                          :icon="'die'"></inner-box-component>
-    <inner-box-component :mode="'text'" :font-size="15" :position="'br'" :icon-width="2" :icon-height="'2'"
+    <inner-box-component :mode="'text'" :font-size="15" :position="'br'" :icon-width="3" :icon-height="'2'" :margin="10"
                          :text='num'></inner-box-component>
 
   </div>

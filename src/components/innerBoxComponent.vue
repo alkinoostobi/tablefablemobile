@@ -14,14 +14,16 @@
          right: position === 'br' || position === 'tr' ? `${hasPrevElementWithPositionClass ? margin + calculateLeftPosition() : calculateLeftPosition()}px` : 'auto',
        }"
        @click="emmit2parent()">
-    <template v-if="mode === 'text'"><span style="text-align: center;" :style="{lineHeight : iconHeight === 0 ? 'min-content' : `${iconHeight}rem`}">{{ text }}</span></template>
+    <template v-if="mode === 'text'"><span style="text-align: center;"
+                                           :style="{lineHeight : iconHeight === 0 ? 'min-content' : `${iconHeight}rem`}">{{ text }}</span>
+    </template>
     <template v-else-if="mode === 'icon'">
       <img :src="utilities.icons[iconOut]" alt="icon" style="max-width: 100%; max-height: 100%;">
     </template>
   </div>
 </template>
 <script>
-import { utilitiesStore } from "stores/utilities";
+import {utilitiesStore} from "stores/utilities";
 
 const utilities = utilitiesStore();
 export default {
@@ -30,15 +32,15 @@ export default {
     return {
       utilities: utilities,
       hasPrevElementWithPositionClass: false,
-      positionTranslate : {
-        'tr' : 'top-right',
-        'tl' : 'top-left',
-        'bl' : 'bottom-left',
-        'br' : 'bottom-right'
+      positionTranslate: {
+        'tr': 'top-right',
+        'tl': 'top-left',
+        'bl': 'bottom-left',
+        'br': 'bottom-right'
       },
-      loaded : false,
-      clicked : false,
-      iconOut : '',
+      loaded: false,
+      clicked: false,
+      iconOut: '',
     };
   },
   props: {
@@ -51,7 +53,7 @@ export default {
       type: String,
       default: 'default',
     },
-    margin:{
+    margin: {
       type: Number,
       default: 50,
     },
@@ -110,7 +112,7 @@ export default {
       this.updatePrevElementWithPositionClass();
     },
   },
-  computed :{
+  computed: {
     computedBorderColor() {
       if (!this.loaded) return '#000000';
 
@@ -152,29 +154,29 @@ export default {
       const el = this.$el || this.$el.querySelector('.inner-box');
       this.hasPrevElementWithPositionClass = el && el.previousElementSibling && el.previousElementSibling.classList.contains(this.positionTranslate[this.position]);
       console.log(this.hasPrevElementWithPositionClass)
-      },
+    },
     calculateLeftPosition() {
-      if(!this.loaded){
+      if (!this.loaded) {
         return 0;
       }
-        this.updatePrevElementWithPositionClass();
-        const el = this.$el || this.$el.querySelector('.inner-box');
+      this.updatePrevElementWithPositionClass();
+      const el = this.$el || this.$el.querySelector('.inner-box');
 
-        if (el && el.previousElementSibling && this.hasPrevElementWithPositionClass) {
-          const margin = this.margin;
-          const previousElementWidth = el.previousElementSibling.offsetWidth;
+      if (el && el.previousElementSibling && this.hasPrevElementWithPositionClass) {
+        const margin = this.margin;
+        const previousElementWidth = el.previousElementSibling.offsetWidth;
 
-          return margin + previousElementWidth;
-        }
+        return margin + previousElementWidth;
+      }
 
-        return 0;
+      return 0;
     },
-    emmit2parent(){
-      if(this.iconAfterClick){
-        if(this.clicked){
+    emmit2parent() {
+      if (this.iconAfterClick) {
+        if (this.clicked) {
           this.iconOut = this.icon;
           this.clicked = false;
-        }else{
+        } else {
           this.iconOut = this.iconAfterClick;
           this.clicked = true;
         }

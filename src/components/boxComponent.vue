@@ -1,7 +1,7 @@
 <template>
   <div class="outer-box">
     <p class="box_Title_centered">{{ statName }}</p>
-    <p class="main_Stat_centered">{{ statScore >= 10 ? `+${statModifier}` : `-${statModifier}`}}</p>
+    <p class="main_Stat_centered">{{ statScore >= 10 ? `+${statModifier}` : `${statModifier}`}}</p>
     <inner-box-component :mode="'text'" :font-size="20" :position="'bl'" :icon-width="'7.5'" :icon-height="'2'" :text="statScore" ></inner-box-component>
     <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'" :backgroundcolor="statColor" :icon="'die'" @clicked="test()" :icon-after-click="'shield'"></inner-box-component>
   </div>

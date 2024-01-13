@@ -1,17 +1,17 @@
 <template>
   <div class="outer-box" style="width: 20rem">
     <p class="box_Title_Left">{{ name }}</p>
-    <p class="Skill1">{{ `+${str}` }}</p>
+    <p class="Skill1">{{ str >= 0 ? `+${str}` : `${str}` }}</p>
     <p class="SkillN1">{{ "STR" }}</p>
-    <p class="Skill2">{{ '+4' }}</p>
+    <p class="Skill2">{{ dex >= 0 ? `+${dex}` : `${dex}` }}</p>
     <p class="SkillN2">{{ "DEX" }}</p>
-    <p class="Skill3">{{ '-1' }}</p>
+    <p class="Skill3">{{ con >= 0 ? `+${con}` : `${con}` }}</p>
     <p class="SkillN3">{{ "CON" }}</p>
-    <p class="Skill4">{{ '+2' }}</p>
+    <p class="Skill4">{{ int >= 0 ? `+${int}` : `${int}` }}</p>
     <p class="SkillN4">{{ "INT" }}</p>
-    <p class="Skill5">{{ '+2' }}</p>
+    <p class="Skill5">{{ wis >= 0 ? `+${wis}` : `${wis}` }}</p>
     <p class="SkillN5">{{ "WIS" }}</p>
-    <P class="Skill6">{{ '+3' }}</P>
+    <P class="Skill6">{{ cha >= 0 ? `+${cha}` : `${cha}` }}</P>
     <p class="SkillN6">{{ "CHA" }}</p>
     <p class="Skill1rec"></p>
     <p class="Skill2rec"></p>

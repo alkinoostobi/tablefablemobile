@@ -1,10 +1,15 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center" style="margin-top: 5rem;
+    display: flex;
+    row-gap: 3rem;
+    flex-wrap: wrap;
+    align-content: flex-start;">
     <box-component-savings v-for="(savings ,savingindex) in savings" :key="'savingindex'+savingindex"
                            :saving-name="savings.name" :saving-skill="savings.skill"
                            :saving-prof="savings.prof" :saving-score="savings.score"
                            :saving-prof-train="savings.proftrain"
                            :saving-prof-color="savings.profcolor"
+                           :skilln="savings.skilln"
                            :saving-die-color="savings.diecolor"></box-component-savings>
     <savesComponent v-if="false"></savesComponent>
   </q-page>
@@ -15,8 +20,10 @@ import {defineComponent} from 'vue'
 import savesComponent from "components/savesComponent.vue";
 import boxComponentSavings from "components/boxComponentSavings.vue";
 import {Statstore} from "stores/stats";
+import {utilitiesStore} from "stores/utilities";
 
-
+const stat = Statstore();
+const util = utilitiesStore();
 export default defineComponent({
   name: 'IndexPageSavings',
   components: {
@@ -29,35 +36,58 @@ export default defineComponent({
       savings: {
         fort: {
           name: 'FORTITUDE',
-          skill: 1,
-          prof: 2,
-          score: 3,
+          skilln: 'CON',
+          skill: 0,
+          prof: 0,
+          score: 0,
           proftrain: 'UNTRAINED',
-          profcolor: '#0C6915',
-          diecolor: '#023669'
+          profcolor: 0,
+          diecolor: 0
         },
-        fart: {
+        refl: {
           name: 'REFLEX',
-          skill: 1,
-          prof: 2,
-          score: 3,
+          skilln: 'DEX',
+          skill: 0,
+          prof: 0,
+          score: 0,
           proftrain: 'UNTRAINED',
-          profcolor: '#0C6915',
-          diecolor: '#023669'
+          profcolor: 0,
+          diecolor: 0,
         },
 
-        fock: {
+        will: {
           name: 'WILL',
-          skill: 1,
-          prof: 2,
-          score: 3,
+          skilln: 'WIS',
+          skill: 0,
+          prof: 0,
+          score: 0,
           proftrain: 'MASTER',
-          profcolor: '#602402',
-          diecolor: '#023669'
+          profcolor: 0,
+          diecolor: 0,
         },
-      }
+      },
+      stat: stat,
+      util: util,
     };
+  },
+  mounted() {
+    this.savings.fort.skill = this.stat.character1.modifiers.con;
+    this.savings.fort.prof = 0;
+    this.savings.fort.score = this.stat.character1.defense.fort;
+    this.savings.fort.profcolor = this.util.colors.untr;
+    this.savings.fort.diecolor = this.util.colors.con;
+
+    this.savings.refl.skill = this.stat.character1.modifiers.dex;
+    this.savings.refl.prof = 2;
+    this.savings.refl.score = this.stat.character1.defense.refl;
+    this.savings.refl.profcolor = this.util.colors.trai;
+    this.savings.refl.diecolor = this.util.colors.dex;
+
+    this.savings.will.skill = this.stat.character1.modifiers.con;
+    this.savings.will.prof = 6;
+    this.savings.will.score = this.stat.character1.defense.will;
+    this.savings.will.profcolor = this.util.colors.mast;
+    this.savings.will.diecolor = this.util.colors.wis;
   }
-  ,
 })
 </script>

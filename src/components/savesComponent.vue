@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .outer-box{
   position: relative;
-  width: 24rem;
+  width: 12rem;
   height: 12rem;
   border-radius: 1.25rem;
   border: 8px solid #4C2B0D;

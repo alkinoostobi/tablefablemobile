@@ -2,9 +2,13 @@
 const routes = [
   {
     path: '/',
+    redirect: '/scores',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: 'scores', component: () => import('pages/IndexPage.vue') },
+      { path: 'skills', component: () => import('pages/IndexPageSkills.vue') },
+      { path: 'savings', component: () => import('pages/IndexPageSavings.vue') },
+      { path: 'equipment', component: () => import('pages/IndexPageEquipments.vue') },
     ]
   },
 

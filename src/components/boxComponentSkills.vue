@@ -1,7 +1,7 @@
 <template>
   <div class="outer-box">
     <p class="box_Title_centered">{{ skillName }}</p>
-    <p class="main_Stat_centered">{{skillScore}}</p>
+    <p class="main_Stat_centered">{{skillScore >= 0 ? `+${skillScore}` : `${skillScore}`}}</p>
     <inner-box-component :mode="'text'" :font-size="13" :position="'bl'" :icon-width="'7.5'" :icon-height="'2'"
                          :text="skillProf" :backgroundcolor="skillColor"></inner-box-component>
     <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'" :backgroundcolor="skillDieColor"
