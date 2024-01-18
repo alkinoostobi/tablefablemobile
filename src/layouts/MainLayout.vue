@@ -7,7 +7,7 @@
         <img :src="util.icons.acicon" class="ac-style"/>
       </p>
       <p class="square-button1" @click="toggleButtons" :class="{ pressed: showbuttons }">
-        {{ stats.$state.tokens.pcs.pl1.defense.hp}}
+        {{ stats.$state.tokens.pcs[util.playerselected] ? stats.$state.tokens.pcs[util.playerselected].defense.hp : 0}}
         <img :src="util.icons.hpicon" class="hp-style"/>
       </p>
       <div v-if="showbuttons" class="plus-button">
@@ -65,7 +65,7 @@
 import {defineComponent, ref} from "vue";
 import {Statstore} from "stores/stats";
 import {utilitiesStore} from "stores/utilities";
-
+import socket from "../boot/socket";
 
 export default defineComponent({
   name: "MainLayout",
@@ -89,10 +89,10 @@ export default defineComponent({
       this.showbuttons = !this.showbuttons;
     },
     increaseHp() {
-      this.stats.increasePL1(1);
+      this.stats.changeHp(this.util.playerselected, 'pcs', 1)
     },
     decreaseHp() {
-      this.stats.reducePL1(1);
+      this.stats.changeHp(this.util.playerselected, 'pcs', -1)
     },
     updateCurrentMenu(menu) {
       this.currentmenu = menu;
@@ -117,15 +117,31 @@ export default defineComponent({
       this.$router.replace({path: 'scenes'});
     },
   },
+  watch: {
+  'util.playerselected': {
+    handler() {
+      this.hp = this.stats.tokens.pcs[this.util.playerselected].defense.hp;
+      this.ac = this.stats.tokens.pcs[this.util.playerselected].defense.ac;
+      this.perc = this.stats.tokens.pcs[this.util.playerselected].skills.Perception[0];
+      this.name = this.stats.tokens.pcs[this.util.playerselected].name;
+      this.race = this.stats.tokens.pcs[this.util.playerselected].race.main;
+      this.clas = this.stats.tokens.pcs[this.util.playerselected].class;
+    },
+    deep: true
+  },
+},
   mounted() {
     this.showbuttons = false;
-    this.hp = this.stats.tokens.pcs.pl1.defense.hp;
-    this.ac = this.stats.tokens.pcs.pl1.defense.ac;
-    this.perc = this.stats.tokens.pcs.pl1.skills.Perception[0];
-    this.name = this.stats.tokens.pcs.pl1.name;
-    this.race = this.stats.tokens.pcs.pl1.race.main;
-    this.clas = this.stats.tokens.pcs.pl1.class;
-    this.level = 5;
+    this.hp = 0;
+    this.ac = 0;
+    this.perc = 0;
+    this.name = 'No name';
+    this.race = 'No race';
+    this.clas = 'No class';
+    this.level = 1;
+    socket.on('deleteToken', (token) => {
+      this.$router.push({path: 'died'});
+    });
   },
 });
 </script>

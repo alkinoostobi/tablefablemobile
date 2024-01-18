@@ -13,13 +13,16 @@
 <script>
 import innerBoxComponent from "components/innerBoxComponent.vue";
 import socket from "../boot/socket"
+import {utilitiesStore} from "stores/utilities";
+const util = utilitiesStore();
 export default {
   name: 'boxComponent',
   data() {
     return {
       innerBoxWidth: 100,
       anotherInnerBoxWidth: 200,
-      show_second: false
+      show_second: false,
+      util : util,
     };
   },
   props: {
@@ -42,7 +45,8 @@ export default {
   },
   methods: {
     rolldie() {
-      socket.emit('rolldie', 20);
+      console.log("ROLLMYDICE")
+      socket.emit('rolldie', this.util.playerselected);
       console.log("ROLLMYDICE");
     }
   },

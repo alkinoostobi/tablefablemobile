@@ -158,76 +158,125 @@ export default defineComponent({
       stat: stat,
     };
   },
+  watch: {
+  'util.playerselected': {
+      handler() {
+      console.log("what is the player selected" + this.util.playerselected)
+      this.skills.acro.score = this.stat.tokens.pcs[this.util.playerselected].skills.Acrobatics[0];
+      this.skills.arc.score = this.stat.tokens.pcs[this.util.playerselected].skills.Arcana[0];
+      this.skills.athl.score = this.stat.tokens.pcs[this.util.playerselected].skills.Athletics[0];
+      this.skills.craf.score = this.stat.tokens.pcs[this.util.playerselected].skills.Crafting[0];
+      this.skills.dece.score = this.stat.tokens.pcs[this.util.playerselected].skills.Deception[0];
+      this.skills.dipl.score = this.stat.tokens.pcs[this.util.playerselected].skills.Diplomacy[0];
+      this.skills.inti.score = this.stat.tokens.pcs[this.util.playerselected].skills.Intimidate[0];
+      this.skills.lore.score = this.stat.tokens.pcs[this.util.playerselected].skills.Lore[0];
+      this.skills.medi.score = this.stat.tokens.pcs[this.util.playerselected].skills.Medicine[0];
+      this.skills.natu.score = this.stat.tokens.pcs[this.util.playerselected].skills.Nature[0];
+      this.skills.occu.score = this.stat.tokens.pcs[this.util.playerselected].skills.Occultism[0];
+      this.skills.perf.score = this.stat.tokens.pcs[this.util.playerselected].skills.Performance[0];
+      this.skills.perc.score = this.stat.tokens.pcs[this.util.playerselected].skills.Perception[0];
+      this.skills.reli.score = this.stat.tokens.pcs[this.util.playerselected].skills.Religion[0];
+      this.skills.soci.score = this.stat.tokens.pcs[this.util.playerselected].skills.Society[0];
+      this.skills.stel.score = this.stat.tokens.pcs[this.util.playerselected].skills.Stealth[0];
+      this.skills.surv.score = this.stat.tokens.pcs[this.util.playerselected].skills.Survival[0];
+      this.skills.thie.score = this.stat.tokens.pcs[this.util.playerselected].skills.Thievery[0];
+
+    },
+    deep: true
+  },
+},
   mounted() {
-    this.skills.acro.score = this.stat.tokens.pcs.pl1.skills.Acrobatics[0];
+    if (this.util.playerselected) {
+      this.skills.acro.score = this.stat.tokens.pcs[this.util.playerselected].skills.Acrobatics[0];
+      this.skills.arc.score = this.stat.tokens.pcs[this.util.playerselected].skills.Arcana[0];
+      this.skills.athl.score = this.stat.tokens.pcs[this.util.playerselected].skills.Athletics[0];
+      this.skills.craf.score = this.stat.tokens.pcs[this.util.playerselected].skills.Crafting[0];
+      this.skills.dece.score = this.stat.tokens.pcs[this.util.playerselected].skills.Deception[0];
+      this.skills.dipl.score = this.stat.tokens.pcs[this.util.playerselected].skills.Diplomacy[0];
+      this.skills.inti.score = this.stat.tokens.pcs[this.util.playerselected].skills.Intimidate[0];
+      this.skills.lore.score = this.stat.tokens.pcs[this.util.playerselected].skills.Lore[0];
+      this.skills.medi.score = this.stat.tokens.pcs[this.util.playerselected].skills.Medicine[0];
+      this.skills.natu.score = this.stat.tokens.pcs[this.util.playerselected].skills.Nature[0];
+      this.skills.occu.score = this.stat.tokens.pcs[this.util.playerselected].skills.Occultism[0];
+      this.skills.perf.score = this.stat.tokens.pcs[this.util.playerselected].skills.Performance[0];
+      this.skills.perc.score = this.stat.tokens.pcs[this.util.playerselected].skills.Perception[0];
+      this.skills.reli.score = this.stat.tokens.pcs[this.util.playerselected].skills.Religion[0];
+      this.skills.soci.score = this.stat.tokens.pcs[this.util.playerselected].skills.Society[0];
+      this.skills.stel.score = this.stat.tokens.pcs[this.util.playerselected].skills.Stealth[0];
+      this.skills.surv.score = this.stat.tokens.pcs[this.util.playerselected].skills.Survival[0];
+      this.skills.thie.score = this.stat.tokens.pcs[this.util.playerselected].skills.Thievery[0];
+    } else {
+      this.skills.acro.score =0
+      this.skills.arc.score = 0
+      this.skills.athl.score =0
+      this.skills.craf.score =0
+      this.skills.dece.score =0
+      this.skills.dipl.score =0
+      this.skills.inti.score =0
+      this.skills.lore.score =0
+      this.skills.medi.score =0
+      this.skills.natu.score =0
+      this.skills.occu.score =0
+      this.skills.perf.score =0
+      this.skills.perc.score =0
+      this.skills.reli.score =0
+      this.skills.soci.score =0
+      this.skills.stel.score =0
+      this.skills.surv.score =0
+      this.skills.thie.score =0
+    }
     this.skills.acro.color = this.util.colors.untr;
     this.skills.acro.diecolor = this.util.colors.dex;
 
-    this.skills.arc.score = this.stat.tokens.pcs.pl1.skills.Arcana[0];
     this.skills.arc.color = this.util.colors.trai;
     this.skills.arc.diecolor = this.util.colors.int;
 
-    this.skills.athl.score = this.stat.tokens.pcs.pl1.skills.Athletics[0];
     this.skills.athl.color = this.util.colors.expe;
     this.skills.athl.diecolor = this.util.colors.str;
 
-    this.skills.craf.score = this.stat.tokens.pcs.pl1.skills.Crafting[0];
     this.skills.craf.color = this.util.colors.untr;
     this.skills.craf.diecolor = this.util.colors.int;
 
-    this.skills.dece.score = this.stat.tokens.pcs.pl1.skills.Deception[0];
     this.skills.dece.color = this.util.colors.mast;
     this.skills.dece.diecolor = this.util.colors.cha;
 
-    this.skills.dipl.score = this.stat.tokens.pcs.pl1.skills.Diplomacy[0];
     this.skills.dipl.color = this.util.colors.trai;
     this.skills.dipl.diecolor = this.util.colors.cha;
 
-    this.skills.inti.score = this.stat.tokens.pcs.pl1.skills.Intimidate[0];
     this.skills.inti.color = this.util.colors.untr;
     this.skills.inti.diecolor = this.util.colors.cha;
 
-    this.skills.lore.score = this.stat.tokens.pcs.pl1.skills.Lore[0];;
     this.skills.lore.color = this.util.colors.expe;
     this.skills.lore.diecolor = this.util.colors.int;
 
-    this.skills.medi.score = this.stat.tokens.pcs.pl1.skills.Medicine[0];;
     this.skills.medi.color = this.util.colors.trai;
     this.skills.medi.diecolor = this.util.colors.wis;
 
-    this.skills.natu.score = this.stat.tokens.pcs.pl1.skills.Nature[0];
     this.skills.natu.color = this.util.colors.untr;
     this.skills.natu.diecolor = this.util.colors.wis;
 
-    this.skills.occu.score = this.stat.tokens.pcs.pl1.skills.Occultism[0];
     this.skills.occu.color = this.util.colors.trai;
     this.skills.occu.diecolor = this.util.colors.int;
 
-    this.skills.perf.score = this.stat.tokens.pcs.pl1.skills.Performance[0];
     this.skills.perf.color = this.util.colors.expe;
     this.skills.perf.diecolor = this.util.colors.cha;
 
-    this.skills.perc.score = this.stat.tokens.pcs.pl1.skills.Perception[0];
     this.skills.perc.color = this.util.colors.mast;
     this.skills.perc.diecolor = this.util.colors.wis;
 
-    this.skills.reli.score = this.stat.tokens.pcs.pl1.skills.Religion[0];
     this.skills.reli.color = this.util.colors.expe;
     this.skills.reli.diecolor = this.util.colors.wis;
 
-    this.skills.soci.score = this.stat.tokens.pcs.pl1.skills.Society[0];
     this.skills.soci.color = this.util.colors.lege;
     this.skills.soci.diecolor = this.util.colors.int;
 
-    this.skills.stel.score = this.stat.tokens.pcs.pl1.skills.Stealth[0];
     this.skills.stel.color = this.util.colors.lege;
     this.skills.stel.diecolor = this.util.colors.dex;
 
-    this.skills.surv.score = this.stat.tokens.pcs.pl1.skills.Society[0];
     this.skills.surv.color = this.util.colors.trai;
     this.skills.surv.diecolor = this.util.colors.wis;
 
-    this.skills.thie.score = this.stat.tokens.pcs.pl1.skills.Thievery[0];
+    this.skills.thie.score = 0;
     this.skills.thie.color = this.util.colors.mast;
     this.skills.thie.diecolor = this.util.colors.dex;
 

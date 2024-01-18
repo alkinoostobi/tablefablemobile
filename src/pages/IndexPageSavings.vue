@@ -33,6 +33,7 @@ export default defineComponent({
   data() {
     return {
       show_second: false,
+      
       savings: {
         fort: {
           name: 'FORTITUDE',
@@ -70,22 +71,49 @@ export default defineComponent({
       util: util,
     };
   },
+  watch: {
+  'util.playerselected': {
+      handler() {
+        this.savings.fort.skill = this.stat.tokens.pcs[this.util.playerselected].stats.con[1];
+      this.savings.refl.skill = this.stat.tokens.pcs[this.util.playerselected].stats.dex[1];
+      this.savings.will.skill = this.stat.tokens.pcs[this.util.playerselected].stats.wis[1];
+
+      this.savings.fort.score = this.stat.tokens.pcs[this.util.playerselected].defense.fort;
+      this.savings.refl.score = this.stat.tokens.pcs[this.util.playerselected].defense.refl;
+      this.savings.will.score = this.stat.tokens.pcs[this.util.playerselected].defense.will;
+    },
+    deep: true
+  },
+},
   mounted() {
-    this.savings.fort.skill = this.stat.tokens.pcs.pl1.stats.con[1];
+    if (this.util.playerselected) {
+      this.savings.fort.skill = this.stat.tokens.pcs[this.util.playerselected].stats.con[1];
+      this.savings.refl.skill = this.stat.tokens.pcs[this.util.playerselected].stats.dex[1];
+      this.savings.will.skill = this.stat.tokens.pcs[this.util.playerselected].stats.wis[1];
+
+      this.savings.fort.score = this.stat.tokens.pcs[this.util.playerselected].defense.fort;
+      this.savings.refl.score = this.stat.tokens.pcs[this.util.playerselected].defense.refl;
+      this.savings.will.score = this.stat.tokens.pcs[this.util.playerselected].defense.will;
+    } else {
+      this.savings.fort.skill = 0;
+      this.savings.refl.skill = 0;
+      this.savings.will.skill =0;
+
+      this.savings.fort.score =0;
+      this.savings.refl.score = 0;
+      this.savings.will.score = 0;
+    }
+   
     this.savings.fort.prof = 0;
-    this.savings.fort.score = this.stat.tokens.pcs.pl1.defense.fort;
+    
     this.savings.fort.profcolor = this.util.colors.untr;
     this.savings.fort.diecolor = this.util.colors.con;
 
-    this.savings.refl.skill = this.stat.tokens.pcs.pl1.stats.dex[1];
     this.savings.refl.prof = 2;
-    this.savings.refl.score = this.stat.tokens.pcs.pl1.defense.refl;
     this.savings.refl.profcolor = this.util.colors.trai;
     this.savings.refl.diecolor = this.util.colors.dex;
 
-    this.savings.will.skill = this.stat.tokens.pcs.pl1.stats.wis[1];
     this.savings.will.prof = 6;
-    this.savings.will.score = this.stat.tokens.pcs.pl1.defense.will;
     this.savings.will.profcolor = this.util.colors.mast;
     this.savings.will.diecolor = this.util.colors.wis;
   }

@@ -34,7 +34,7 @@ export const Statstore = defineStore('stats', {
           stats: {
             str: [14, 2],
             dex: [14, 2],
-            con: [12, 1],
+            con: [20, 5],
             int: [12, 1],
             wis: [12, 1],
             cha: [18, 4],
@@ -55,6 +55,7 @@ export const Statstore = defineStore('stats', {
             Performance: [0, 'wis'],
             Perception: [50, 'wis'],
             Religion: [0, 'wis'],
+            Survival : [0, 'wis'],
             Society: [0, 'int'],
             Wisdom: [0, 'wis'],
             Thievery: [0, 'dex'],
@@ -113,6 +114,7 @@ export const Statstore = defineStore('stats', {
             Performance: [0, 'wis'],
             Perception: [50, 'wis'],
             Religion: [0, 'wis'],
+            Survival : [0, 'wis'],
             Society: [0, 'int'],
             Wisdom: [0, 'wis'],
             Thievery: [0, 'dex'],
@@ -175,19 +177,15 @@ export const Statstore = defineStore('stats', {
         },
       }
     },
-    reducePL1(amount) {
-      console.log("reducing");
-      this.tokens.pcs.pl1.defense.hp = this.tokens.pcs.pl1.defense.hp - amount;
-    },
-    increasePL1(amount) {
-      console.log("increasing");
-      this.tokens.pcs.pl1.defense.hp = this.tokens.pcs.pl1.defense.hp + amount;
-    },
-    reducePL2() {
-
-      this.tokens.pcs.pl2.defense.hp--;
-    },
 
   }),
+  actions: {
+    changetokenInfo(token) {
+      this.tokens[token.id] = token;
+    },
+    changeHp(token,category, hp) {
+      this.tokens[category][token].defense.hp += hp;
+    }
+  },
 });
 
