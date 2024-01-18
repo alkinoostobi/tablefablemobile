@@ -1,25 +1,53 @@
 <template>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <div>
     <div class="square">
-      <p class="square-button">{{ ac }}
-        <img :src="util.icons.acicon" class="ac-style">
+      <p class="square-button">
+        {{ ac }}
+        <img :src="util.icons.acicon" class="ac-style"/>
       </p>
-      <p class="square-button1">{{ hp }}
-        <img :src="util.icons.hpicon" class="hp-style">
+      <p class="square-button1" @click="toggleButtons" :class="{ pressed: showbuttons }">
+        {{ stats.$state.tokens.pcs.pl1.defense.hp}}
+        <img :src="util.icons.hpicon" class="hp-style"/>
       </p>
-      <p class="square-button2">{{ perc }}
-        <img :src="util.icons.percicon" class="perc-style">
+      <div v-if="showbuttons" class="plus-button">
+        <p v-on:click="increaseHp()">
+          <img :src="util.icons.plus" class="sign-style">
+        </p>
+        <p v-on:click="decreaseHp()" class="minus-style">
+          <img :src="util.icons.minus" class="sign-style">
+        </p>
+      </div>
+      <p class="square-button2">
+        {{ perc }}
+        <img :src="util.icons.percicon" class="perc-style"/>
       </p>
       <p class="square-button3">
-        <img :src="util.icons.blued20" class="die-style">
+        <img :src="util.icons.blued20" class="die-style"/>
       </p>
       <p class="current-menu">{{ currentmenu }}</p>
-      <p class="menu-option-1" @click="navigateToScoresPage" :class="{ 'active-menu': currentMenu === 'ABILITY SCORES' }"></p>
-      <p class="menu-option-2" @click="navigateToSkillsPage" :class="{ 'active-menu': currentMenu === 'SKILLS' }"></p>
-      <p class="menu-option-3" @click="navigateToSavingsPage" :class="{ 'active-menu': currentMenu === 'SAVING THROWS' }"></p>
-      <p class="menu-option-4" @click="navigateToEquipmentPage" :class="{ 'active-menu': currentMenu === 'ITEM NOTES' }"></p>
-      <p class="menu-option-5"></p>
+      <p
+        class="menu-option-1"
+        @click="navigateToScoresPage"
+        :class="{ 'active-menu': currentmenu === 'ABILITY SCORES' }"
+      ></p>
+      <p
+        class="menu-option-2"
+        @click="navigateToSkillsPage"
+        :class="{ 'active-menu': currentmenu === 'SKILLS' }"
+      ></p>
+      <p
+        class="menu-option-3"
+        @click="navigateToSavingsPage"
+        :class="{ 'active-menu': currentmenu === 'SAVING THROWS' }"
+      ></p>
+      <p
+        class="menu-option-4"
+        @click="navigateToEquipmentPage"
+        :class="{ 'active-menu': currentmenu === 'ITEM NOTES' }"
+      ></p>
+      <p class="menu-option-5"
+         @click="navigateToScenesPage"></p>
     </div>
 
     <p class="Char_Name">{{ name }}</p>
@@ -34,13 +62,13 @@
 </template>
 
 <script>
-import {defineComponent, ref} from 'vue'
+import {defineComponent, ref} from "vue";
 import {Statstore} from "stores/stats";
 import {utilitiesStore} from "stores/utilities";
 
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
   data() {
     return {
       stats: Statstore(),
@@ -52,49 +80,60 @@ export default defineComponent({
       race: "def",
       clas: "def",
       level: 0,
-      currentmenu: 'ABILITY SCORES',
-    }
+      currentmenu: "ABILITY SCORES",
+      showbuttons: false,
+    };
   },
   methods: {
-    navigateToScoresPage() {
-      this.updateCurrentMenu("ABILITY SCORES");
-      this.$router.push({path: 'scores'});
+    toggleButtons() {
+      this.showbuttons = !this.showbuttons;
     },
-    navigateToSkillsPage() {
-      this.updateCurrentMenu("SKILLS");
-      this.$router.push({path: 'skills'});
+    increaseHp() {
+      this.stats.increasePL1(1);
     },
-    navigateToSavingsPage() {
-      this.updateCurrentMenu("SAVING THROWS");
-      this.$router.push({path: 'savings'});
-    },
-    navigateToEquipmentPage() {
-      this.updateCurrentMenu("ITEM NOTES");
-      this.$router.push({path: 'equipment'});
+    decreaseHp() {
+      this.stats.reducePL1(1);
     },
     updateCurrentMenu(menu) {
       this.currentmenu = menu;
     },
+    navigateToScoresPage() {
+      this.updateCurrentMenu('ABILITY SCORES');
+      this.$router.push({path: 'scores'});
+    },
+    navigateToSkillsPage() {
+      this.updateCurrentMenu('SKILLS');
+      this.$router.push({path: 'skills'});
+    },
+    navigateToSavingsPage() {
+      this.updateCurrentMenu('SAVING THROWS');
+      this.$router.push({path: 'savings'});
+    },
+    navigateToEquipmentPage() {
+      this.updateCurrentMenu('ITEM NOTES');
+      this.$router.push({path: 'equipments'});
+    },
+    navigateToScenesPage() {
+      this.$router.replace({path: 'scenes'});
+    },
   },
   mounted() {
-    this.hp = this.stats.character1.defense.hp;
-    this.ac = this.stats.character1.defense.ac;
-    this.perc = this.stats.character1.skills.perc;
-    this.name = this.stats.character1.name;
-    this.race = this.stats.character1.race;
-    this.clas = this.stats.character1.class;
-    this.level = this.stats.character1.level;
-
-  }
-})
-
+    this.showbuttons = false;
+    this.hp = this.stats.tokens.pcs.pl1.defense.hp;
+    this.ac = this.stats.tokens.pcs.pl1.defense.ac;
+    this.perc = this.stats.tokens.pcs.pl1.skills.Perception[0];
+    this.name = this.stats.tokens.pcs.pl1.name;
+    this.race = this.stats.tokens.pcs.pl1.race.main;
+    this.clas = this.stats.tokens.pcs.pl1.class;
+    this.level = 5;
+  },
+});
 </script>
 
 <style scoped>
-
 .square {
   position: relative;
-  background-color: #F6C99C;
+  background-color: #f6c99c;
   margin-bottom: -30%;
   width: 100%;
   height: 20rem;
@@ -107,7 +146,7 @@ export default defineComponent({
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  color: #4C2B0D;
+  color: #4c2b0d;
   text-align: center;
   font-size: 2.5rem;
 }
@@ -118,7 +157,7 @@ export default defineComponent({
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  color: #83633D;
+  color: #83633d;
   text-align: center;
   font-size: 1.5rem;
 }
@@ -129,7 +168,7 @@ export default defineComponent({
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  color: #83633D;
+  color: #83633d;
   text-align: center;
   font-size: 1.2rem;
 }
@@ -141,8 +180,8 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 4.5rem;
   height: 4.5rem;
-  background-color: #4C2B0D;
-  color: #F6C99C;
+  background-color: #4c2b0d;
+  color: #f6c99c;
   text-align: center;
   line-height: 6rem;
   font-size: 2rem;
@@ -158,8 +197,8 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 4.5rem;
   height: 4.5rem;
-  background-color: #4C2B0D;
-  color: #FF5945;
+  background-color: #4c2b0d;
+  color: #ff5945;
   text-align: center;
   line-height: 6rem;
   font-size: 2rem;
@@ -175,7 +214,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 4.5rem;
   height: 4.5rem;
-  background-color: #4747FC;
+  background-color: #4747fc;
   color: #fff;
   text-align: center;
   line-height: 6rem;
@@ -197,7 +236,7 @@ export default defineComponent({
   text-align: center;
   line-height: 100px;
   cursor: pointer;
-  border: 0.30rem solid #4747FC;
+  border: 0.3rem solid #4747fc;
   border-radius: 50%;
 }
 
@@ -206,7 +245,7 @@ export default defineComponent({
   top: 77%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #83633D;
+  color: #83633d;
   text-align: center;
   font-size: 1.2rem;
 }
@@ -218,13 +257,12 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  background-color: #4C2B0D;
+  background-color: #4c2b0d;
   color: #fff;
   text-align: center;
   line-height: 100px;
   cursor: pointer;
   border-radius: 50%;
-
 }
 
 .menu-option-2 {
@@ -234,14 +272,13 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  background-color: #A77D57;
+  background-color: #a77d57;
   color: #fff;
   text-align: center;
   line-height: 100px;
   cursor: pointer;
   border-radius: 50%;
 }
-
 
 .menu-option-3 {
   position: absolute;
@@ -250,7 +287,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  background-color: #A77D57;
+  background-color: #a77d57;
   color: #fff;
   text-align: center;
   line-height: 100px;
@@ -265,7 +302,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  background-color: #A77D57;
+  background-color: #a77d57;
   color: #fff;
   text-align: center;
   line-height: 100px;
@@ -280,7 +317,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  background-color: #A77D57;
+  background-color: #a77d57;
   color: #fff;
   text-align: center;
   line-height: 100px;
@@ -323,4 +360,32 @@ export default defineComponent({
 .active-menu {
   color: red;
 }
+
+.plus-button{
+  z-index: 10;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  margin-right: 10rem;
+}
+.sign-style {
+  margin-right: 10rem;
+  left:50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #a77d57;
+  border-radius: 50%;
+}
+
+.minus-style {
+  margin-left: 1.5rem;
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  top:0%;
+  left: -35%;
+  background: #0C695E;
+  border-radius: 50%;
+}
+
 </style>

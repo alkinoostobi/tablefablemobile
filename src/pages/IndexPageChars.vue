@@ -1,21 +1,22 @@
 <template>
-  <q-page class="flex flex-center">
-    <box-component-chars v-for="(char, charindex) in chars" :key="'charindex'+charindex"
-                         :name="char.name"
-                         :more="char.more"
-                         :str="char.str" :dex="char.dex" :con="char.con" :int="char.int" :wis="char.wis" :cha="char.cha"
-                         :hpcolor="char.hpcolor" :accolor="char.accolor"
-                         :health="char.health" :aclass="char.aclass"></box-component-chars>
+  <q-page class="flex flex-center" style="margin-top: 5rem;
+    display: flex;
+    row-gap: 3rem;
+    flex-wrap: wrap;
+    align-content: flex-start;">
+    <box-component-chars v-for="(char, charindex) in chars" :key="'charindex' + charindex" :name="char.name"
+      :more="char.more" :str="char.str" :dex="char.dex" :con="char.con" :int="char.int" :wis="char.wis" :cha="char.cha"
+      :hpcolor="char.hpcolor" :accolor="char.accolor" :health="char.health" :aclass="char.aclass"></box-component-chars>
     <savesComponent v-if="false"></savesComponent>
   </q-page>
 </template>
 
 <script>
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import boxComponentChars from 'components/boxComponentChars.vue'
 import savesComponent from "components/savesComponent.vue";
-import {Statstore} from "stores/stats";
-import {utilitiesStore} from "stores/utilities";
+import { Statstore } from "stores/stats";
+import { utilitiesStore } from "stores/utilities";
 
 const utilities = utilitiesStore();
 const stats = Statstore();
@@ -63,27 +64,27 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.chars.char1.name = this.stats.character1.name;
-    this.chars.char1.str = this.stats.character1.modifiers.str;
-    this.chars.char1.dex = this.stats.character1.modifiers.dex;
-    this.chars.char1.con = this.stats.character1.modifiers.con;
-    this.chars.char1.int = this.stats.character1.modifiers.int;
-    this.chars.char1.wis = this.stats.character1.modifiers.wis;
-    this.chars.char1.cha = this.stats.character1.modifiers.cha;
-    this.chars.char1.health = this.stats.character1.defense.hp;
-    this.chars.char1.aclass = this.stats.character1.defense.ac
+    this.chars.char1.name = this.stats.tokens.pcs.pl1.name
+    this.chars.char1.str = this.stats.tokens.pcs.pl1.stats.str[1];
+    this.chars.char1.dex = this.stats.tokens.pcs.pl1.stats.dex[1];
+    this.chars.char1.con = this.stats.tokens.pcs.pl1.stats.con[1];
+    this.chars.char1.int = this.stats.tokens.pcs.pl1.stats.int[1];
+    this.chars.char1.wis = this.stats.tokens.pcs.pl1.stats.wis[1];
+    this.chars.char1.cha = this.stats.tokens.pcs.pl1.stats.cha[1];
+    this.chars.char1.health = this.stats.tokens.pcs.pl1.defense.hp;
+    this.chars.char1.aclass = this.stats.tokens.pcs.pl1.defense.ac;
     this.chars.char1.hpcolor = this.utilities.colors.heal;
     this.chars.char1.accolor = this.utilities.colors.acla;
 
-    this.chars.char2.name = this.stats.character2.name;
-    this.chars.char2.str = this.stats.character2.modifiers.str;
-    this.chars.char2.dex = this.stats.character2.modifiers.dex;
-    this.chars.char2.con = this.stats.character2.modifiers.con;
-    this.chars.char2.int = this.stats.character2.modifiers.int;
-    this.chars.char2.wis = this.stats.character2.modifiers.wis;
-    this.chars.char2.cha = this.stats.character2.modifiers.cha;
-    this.chars.char2.health = this.stats.character2.defense.hp
-    this.chars.char2.aclass = this.stats.character2.defense.ac
+    this.chars.char2.name = this.stats.tokens.pcs.pl2.name;
+    this.chars.char2.str = this.stats.tokens.pcs.pl2.stats.str[1];
+    this.chars.char2.dex = this.stats.tokens.pcs.pl2.stats.dex[1];
+    this.chars.char2.con = this.stats.tokens.pcs.pl2.stats.con[1];
+    this.chars.char2.int = this.stats.tokens.pcs.pl2.stats.int[1];
+    this.chars.char2.wis = this.stats.tokens.pcs.pl2.stats.wis[1];
+    this.chars.char2.cha = this.stats.tokens.pcs.pl2.stats.cha[1];
+    this.chars.char2.health = this.stats.tokens.pcs.pl2.defense.hp;
+    this.chars.char2.aclass = this.stats.tokens.pcs.pl2.defense.ac;
     this.chars.char2.hpcolor = this.utilities.colors.heal;
     this.chars.char2.accolor = this.utilities.colors.acla;
   }

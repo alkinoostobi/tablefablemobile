@@ -1,18 +1,19 @@
 <template>
   <div class="outer-box" style="width: 20rem; height: 15rem">
+    <div class="image-container"><img :src="image" class="background-style"></div>
     <div class="Item_desc" v-text="desc"></div>
     <inner-box-component :mode="'text'" :font-size="15" :position="'tl'" :icon-width="'7.5'" :icon-height="'2'"
                          :backgroundcolor="color"
-                         :text='name'></inner-box-component>
-    <inner-box-component :mode="'icon'" :position="'tr'" :icon-width="2" :icon-height="2" :backgroundcolor="'#545353'"
-                         :icon='image'></inner-box-component>
+                         :text='name' style="white-space:nowrap"></inner-box-component>
+    <inner-box-component :mode="'icon'" :position="'tl'" :icon-width="2" :icon-height="2" :backgroundcolor="'#545353'"
+                         :icon="'sword'" :margin="15"></inner-box-component>
     <inner-box-component :mode="'text'" :font-size="15" :position="'bl'" :icon-width="'7.5'" :icon-height="'2'"
                          :backgroundcolor="'#545353'"
                          :text='more'></inner-box-component>
     <inner-box-component :mode="'icon'" :position="'br'" :icon-width="2" :icon-height="'2'" :backgroundcolor="diecolor"
                          :icon="'die'"></inner-box-component>
     <inner-box-component :mode="'text'" :font-size="15" :position="'br'" :icon-width="3" :icon-height="'2'" :margin="10"
-                         :text='num'></inner-box-component>
+                         :text='num' v-bind:backgroundcolor="'#FC9538'"></inner-box-component>
 
   </div>
 </template>
@@ -79,5 +80,11 @@ export default {
 </script>
 
 <style scoped>
-
+.image-container {
+  margin-left: 50%;
+}
+.background-style {
+  width: 50%;
+  height: 100%;
+}
 </style>

@@ -21,7 +21,15 @@
     <p class="Skill6rec"></p>
     <inner-box-component :mode="'text'" :font-size="20" :position="'br'" :icon-width="3" :icon-height="'3'"
                          :backgroundcolor="hpcolor"
-                         :text="health"></inner-box-component>
+                         :text="health" @click="toggleButtons" :class="{pressed:showbuttons}"></inner-box-component>
+    <div v-if="showbuttons" class="plus-button">
+      <p v-on:click="increaseHp()">
+        <img :src="util.icons.plus" class="sign-style">
+      </p>
+      <p v-on:click="decreaseHp()" class="minus-style">
+        <img :src="util.icons.minus" class="sign-style">
+      </p>
+    </div>
     <inner-box-component :mode="'text'" :font-size="20" :position="'br'" :icon-width="3" :icon-height="'3'"
                          :backgroundcolor="accolor"
                          :text="aclass" :margin="6"></inner-box-component>
@@ -33,15 +41,19 @@
 <script>
 import innerBoxComponent from "components/innerBoxComponent.vue";
 import {utilitiesStore} from "stores/utilities";
+import {Statstore} from "stores/stats";
 
-const utilities = utilitiesStore();
+const util = utilitiesStore();
 export default {
   name: 'boxComponentChars',
   data() {
     return {
       innerBoxWidth: 100,
       anotherInnerBoxWidth: 200,
-      show_second: false
+      show_second: false,
+      showbuttons: false,
+      util: utilitiesStore(),
+      stats:Statstore(),
     };
   },
   props: {
@@ -92,6 +104,7 @@ export default {
     aclass: {
       type: Number,
       default: 0,
+
     },
   },
   mounted() {
@@ -105,7 +118,16 @@ export default {
   methods: {
     test() {
       console.log('test');
-    }
+    },
+    toggleButtons() {
+      this.showbuttons = !this.showbuttons;
+    },
+    increaseHp() {
+      this.stats.increasePL1(1);
+    },
+    decreaseHp() {
+      this.stats.reducePL1(1);
+    },
   }
 };
 </script>
@@ -272,5 +294,30 @@ export default {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%234C2B0DFF' stroke-width='4' stroke-dasharray='2%2c 6%2c 16%2c 11' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
   border-radius: 5px;
 }
+.plus-button{
+  z-index: 10;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  margin-right: 10rem;
+}
+.sign-style {
+  margin-right: 10rem;
+  left:50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #a77d57;
+  border-radius: 50%;
+}
 
+.minus-style {
+  margin-left: 1.5rem;
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  top:0%;
+  left: -35%;
+  background: #0C695E;
+  border-radius: 50%;
+}
 </style>

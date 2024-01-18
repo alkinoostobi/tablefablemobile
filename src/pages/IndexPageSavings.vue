@@ -50,7 +50,7 @@ export default defineComponent({
           skill: 0,
           prof: 0,
           score: 0,
-          proftrain: 'UNTRAINED',
+          proftrain: 'TRAINED',
           profcolor: 0,
           diecolor: 0,
         },
@@ -71,21 +71,21 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.savings.fort.skill = this.stat.character1.modifiers.con;
+    this.savings.fort.skill = this.stat.tokens.pcs.pl1.stats.con[1];
     this.savings.fort.prof = 0;
-    this.savings.fort.score = this.stat.character1.defense.fort;
+    this.savings.fort.score = this.stat.tokens.pcs.pl1.defense.fort;
     this.savings.fort.profcolor = this.util.colors.untr;
     this.savings.fort.diecolor = this.util.colors.con;
 
-    this.savings.refl.skill = this.stat.character1.modifiers.dex;
+    this.savings.refl.skill = this.stat.tokens.pcs.pl1.stats.dex[1];
     this.savings.refl.prof = 2;
-    this.savings.refl.score = this.stat.character1.defense.refl;
+    this.savings.refl.score = this.stat.tokens.pcs.pl1.defense.refl;
     this.savings.refl.profcolor = this.util.colors.trai;
     this.savings.refl.diecolor = this.util.colors.dex;
 
-    this.savings.will.skill = this.stat.character1.modifiers.con;
+    this.savings.will.skill = this.stat.tokens.pcs.pl1.stats.wis[1];
     this.savings.will.prof = 6;
-    this.savings.will.score = this.stat.character1.defense.will;
+    this.savings.will.score = this.stat.tokens.pcs.pl1.defense.will;
     this.savings.will.profcolor = this.util.colors.mast;
     this.savings.will.diecolor = this.util.colors.wis;
   }

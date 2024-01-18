@@ -1,16 +1,19 @@
 <template>
   <div class="outer-box">
     <p class="box_Title_centered">{{ skillName }}</p>
-    <p class="main_Stat_centered">{{skillScore >= 0 ? `+${skillScore}` : `${skillScore}`}}</p>
+    <p class="main_Stat_centered">{{ skillScore >= 0 ? `+${skillScore}` : `${skillScore}` }}</p>
     <inner-box-component :mode="'text'" :font-size="13" :position="'bl'" :icon-width="'7.5'" :icon-height="'2'"
                          :text="skillProf" :backgroundcolor="skillColor"></inner-box-component>
-    <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'" :backgroundcolor="skillDieColor"
-                         :icon="'die'" @clicked="test()" :icon-after-click="'shield'"></inner-box-component>
+    <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'"
+                         :backgroundcolor="skillDieColor"
+                         :icon="'die'" @clicked="rollmydice(skillScore)"
+                         :icon-after-click="'shield'"></inner-box-component>
   </div>
 </template>
 
 <script>
 import innerBoxComponent from "components/innerBoxComponent.vue";
+import socket from "boot/socket";
 
 export default {
   name: 'boxComponentSkills',
@@ -38,8 +41,8 @@ export default {
       type: Number,
       default: 0,
     },
-    skillDieColor:{
-      type:Number,
+    skillDieColor: {
+      type: Number,
       default: 0
     }
   },
@@ -54,8 +57,10 @@ export default {
   methods: {
     test() {
       console.log('test');
+    },
+    rollmydice(mod) {
+      socket.emit('skillroll', mod)
     }
-
   }
 };
 </script>
