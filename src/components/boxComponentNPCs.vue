@@ -25,7 +25,8 @@
 import innerBoxComponent from "components/innerBoxComponent.vue";
 import {utilitiesStore} from "stores/utilities";
 import socket from "../boot/socket";
-
+import {Statstore} from "stores/stats";
+const stat = Statstore();
 const util = utilitiesStore();
 export default {
   name: 'boxComponentNPCs',
@@ -83,9 +84,30 @@ export default {
       console.log('test');
     },
     loadnpc() {
-
-      socket.emit('loadnpc', (this.id));
-      console.log("loadnpc socket!");
+      let newid = 'mon'+stat.moncounter;
+     stat.tokens.npcs[newid] = {
+        id: newid,
+        idName : 'Monster ' + stat.moncounter,
+        type: 1,
+        icon: stat.unusednpcs[this.id].icon,
+        position: {},
+        rotation: stat.unusednpcs[this.id].rotation,
+        speed: stat.unusednpcs[this.id].speed,
+        size: stat.unusednpcs[this.id].size,
+        name: stat.unusednpcs[this.id].name,
+        level: stat.unusednpcs[this.id].level,
+        perception: stat.unusednpcs[this.id].perception,
+        defense: {
+          hp: stat.unusednpcs[this.id].defense.hp,
+          ac: stat.unusednpcs[this.id].defense.ac,
+          fort: stat.unusednpcs[this.id].defense.fort,
+          ref: stat.unusednpcs[this.id].defense.ref,
+          will: stat.unusednpcs[this.id].defense.will,
+        },
+        attacks:  stat.unusednpcs[this.id].attacks,
+      }
+      stat.moncounter ++
+      console.log(stat.tokens.npcs);
     }
   }
 

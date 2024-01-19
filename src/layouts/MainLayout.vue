@@ -1,7 +1,7 @@
 <template>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <div>
-    <div class="square">
+    <div class="square" v-if="!died">
       <p class="square-button">
         {{ ac }}
         <img :src="util.icons.acicon" class="ac-style"/>
@@ -22,7 +22,7 @@
         {{ perc }}
         <img :src="util.icons.percicon" class="perc-style"/>
       </p>
-      <p class="square-button3">
+      <p class="square-button3" @click="rollmydice()">
         <img :src="util.icons.blued20" class="die-style"/>
       </p>
       <p class="current-menu">{{ currentmenu }}</p>
@@ -50,9 +50,9 @@
          @click="navigateToScenesPage"></p>
     </div>
 
-    <p class="Char_Name">{{ name }}</p>
-    <p class="Char_Race_Class">{{ race }} {{ clas }}</p>
-    <p class="Char_Level">LEVEL {{ level }}</p>
+    <p class="Char_Name" v-if="!died">{{ name }}</p>
+    <p class="Char_Race_Class" v-if="!died" >{{ race }} {{ clas }}</p>
+    <p class="Char_Level" v-if="!died">LEVEL {{ level }}</p>
     <q-layout view="lHh Lpr lFf">
       <q-page-container>
         <router-view/>
@@ -84,15 +84,22 @@ export default defineComponent({
       showbuttons: false,
     };
   },
+  computed : {
+    died() {
+    return this.$route.fullPath.includes('/player/died');
+  }
+  },
   methods: {
     toggleButtons() {
       this.showbuttons = !this.showbuttons;
     },
     increaseHp() {
       this.stats.changeHp(this.util.playerselected, 'pcs', 1)
+      socket.emit('updateTableToken', this.stats.tokens.pcs[this.util.playerselected], 'pcs');
     },
     decreaseHp() {
       this.stats.changeHp(this.util.playerselected, 'pcs', -1)
+      socket.emit('updateTableToken', this.stats.tokens.pcs[this.util.playerselected] , 'pcs');
     },
     updateCurrentMenu(menu) {
       this.currentmenu = menu;
@@ -100,22 +107,30 @@ export default defineComponent({
     navigateToScoresPage() {
       this.updateCurrentMenu('ABILITY SCORES');
       this.$router.push({path: 'scores'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
     },
     navigateToSkillsPage() {
       this.updateCurrentMenu('SKILLS');
       this.$router.push({path: 'skills'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
     },
     navigateToSavingsPage() {
       this.updateCurrentMenu('SAVING THROWS');
       this.$router.push({path: 'savings'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
     },
     navigateToEquipmentPage() {
       this.updateCurrentMenu('ITEM NOTES');
       this.$router.push({path: 'equipments'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
     },
     navigateToScenesPage() {
       this.$router.replace({path: 'scenes'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
     },
+    rollmydice() {
+      socket.emit('rolldie', this.util.playerselected);
+    }
   },
   watch: {
   'util.playerselected': {
@@ -131,6 +146,8 @@ export default defineComponent({
   },
 },
   mounted() {
+    this.currentmenu = localStorage.getItem('lastSelectedMenu') || null;
+
     this.showbuttons = false;
     this.hp = 0;
     this.ac = 0;
@@ -140,7 +157,17 @@ export default defineComponent({
     this.clas = 'No class';
     this.level = 1;
     socket.on('deleteToken', (token) => {
-      this.$router.push({path: 'died'});
+      console.log('deleteToken', token)
+      if(token == this.util.playerselected && this.$route.path !== '/died' && this.$route.path.startsWith('/player')) {
+        this.$router.push({path: 'died'});
+        delete this.stats.tokens.pcs[token];
+      }
+    });
+    socket.on('updateToken', (token) => {
+      console.log('updateToken', token)
+      if(JSON.stringify(token) !== JSON.stringify(this.stats.tokens.pcs[token.id])) {
+        this.stats.tokens.pcs[token.id] = token;
+      }
     });
   },
 });
@@ -273,7 +300,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 1rem;
   height: 1rem;
-  background-color: #4c2b0d;
+  background-color: #a77d57;
   color: #fff;
   text-align: center;
   line-height: 100px;
@@ -374,7 +401,7 @@ export default defineComponent({
 }
 
 .active-menu {
-  color: red;
+  background-color: #4c2b0d;
 }
 
 .plus-button{

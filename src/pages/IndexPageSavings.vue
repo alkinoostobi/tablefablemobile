@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center" style="margin-top: 5rem;
+  <q-page class="flex flex-center" style="margin-top: 4rem;
     display: flex;
     row-gap: 3rem;
     flex-wrap: wrap;
@@ -33,7 +33,7 @@ export default defineComponent({
   data() {
     return {
       show_second: false,
-      
+
       savings: {
         fort: {
           name: 'FORTITUDE',
@@ -103,9 +103,9 @@ export default defineComponent({
       this.savings.refl.score = 0;
       this.savings.will.score = 0;
     }
-   
+
     this.savings.fort.prof = 0;
-    
+
     this.savings.fort.profcolor = this.util.colors.untr;
     this.savings.fort.diecolor = this.util.colors.con;
 

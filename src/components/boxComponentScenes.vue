@@ -15,7 +15,7 @@
     <inner-box-component :mode="'icon'" :position="'br'" :icon-width="2" :icon-height="'2'" :backgroundcolor="'#52D5FF'"
                          :icon="'music'" :margin="45"></inner-box-component>
     <inner-box-component :mode="'icon'" :position="'tr'" :icon-width="2" :icon-height="'2'" :backgroundcolor="'#FF5252'"
-                         :icon="'edit'"></inner-box-component>
+                         :icon="'edit'" ></inner-box-component>
 
   </div>
 </template>
@@ -58,6 +58,19 @@ export default {
       type: String,
       default: 'default',
     },
+    scene : {
+      type: Object,
+      default: () => {
+        return {
+          'name': '',
+          'more': 'READ NOTES',
+          'desc': '',
+          'background': '',
+          'map':'',
+          'namecolor': '#0C6915',
+        }
+      }
+    },
     namecolor: {
       type: Number,
       default: 0,
@@ -75,7 +88,8 @@ export default {
       console.log('test');
     },
     loadscene() {
-      socket.emit('loadscene', this.map);
+      console.log(this.scene)
+      socket.emit('loadscene', this.scene);
       console.log("12312312")
     }
   }

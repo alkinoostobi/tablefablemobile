@@ -1,12 +1,12 @@
 <template>
-    <q-page class="flex flex-center" style="margin-top: 6rem;
+    <q-page class="flex flex-center" style="margin-top: 4rem;
     display: flex;
     row-gap: 3rem;
     flex-wrap: wrap;
     align-content: flex-start;">
     <box-component-scenes v-for="(scene, sceneindex) in scenes" :key="'sceneindex'+sceneindex"
                           :name="scene.name" :more="scene.more" :desc="scene.desc" :background="scene.background"
-                          :map="scene.map"
+                          :map="scene.map" :scene="scene"
                           :namecolor="scene.namecolor"
     ></box-component-scenes>
     <savesComponent v-if="false"></savesComponent>
@@ -34,6 +34,7 @@ export default defineComponent({
           'name': '',
           'more': 'READ NOTES',
           'desc': '',
+          'gridsize': '0',
           'background': '',
           'map':'',
           'namecolor': '#0C6915',
@@ -42,6 +43,7 @@ export default defineComponent({
           'name': '',
           'more': 'READ NOTES',
           'desc': '',
+          'gridsize': '0',
           'background': '',
           'map':'',
           'namecolor': '#0C6915',
@@ -55,12 +57,13 @@ export default defineComponent({
     this.scenes.tavern.desc = this.dmstuff.scenes.scene_1.desc;
     this.scenes.tavern.background = this.dmstuff.scenes.scene_1.background
     this.scenes.tavern.map = this.dmstuff.scenes.scene_1.map;
+    this.scenes.tavern.gridsize = this.dmstuff.scenes.scene_1.gridsize;
 
     this.scenes.forest.name = this.dmstuff.scenes.scene_2.place;
     this.scenes.forest.desc = this.dmstuff.scenes.scene_2.desc;
     this.scenes.forest.background = this.dmstuff.scenes.scene_2.background;
     this.scenes.forest.map = this.dmstuff.scenes.scene_2.map;
-
+    this.scenes.forest.gridsize = this.dmstuff.scenes.scene_2.gridsize;
   }
 })
 </script>

@@ -3,7 +3,7 @@
 <template>
   <q-page class="flex flex-center" style="align-content: flex-start;
     flex-direction: row; flex-wrap: wrap;row-gap: 2.5rem;
-    margin-top: 4rem">
+    margin-top: 2rem">
     <div v-if="util.playerselected === null">
       <label for="character-select">Select a character:</label>
       <select id="character-select" v-model="util.playerselected">

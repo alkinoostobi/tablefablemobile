@@ -3,12 +3,14 @@ import {defineStore} from 'pinia';
 
 export const Statstore = defineStore('stats', {
   state: () => ({
+    moncounter : 1,
     tokens: {
       pcs: {
         pl1: {
           id: 'pl1',
+          idName : 'Player 1',
           type: 0,
-          'icon': '',
+          'icon': 'https://s3.amazonaws.com/files.d20.io/marketplace/2349674/yebtKpMWfVOqzU379C-KQw/med.png?1648743198602',
           size: {
             x: 1,
             y: 1,
@@ -66,8 +68,9 @@ export const Statstore = defineStore('stats', {
         },
         pl2: {
           id: 'pl2',
+          idName : 'Player 2',
           type: 0,
-          icon: '',
+          icon: 'https://travisaw.com/wp-content/uploads/2021/08/token-generator-normal.png',
           size: {
             x: 1,
             y: 1,
@@ -125,59 +128,61 @@ export const Statstore = defineStore('stats', {
         }
       },
       npcs: {
-        mon1: {
-          id: 'mon1',
-          type: 1,
-          icon: 'https://i.pinimg.com/originals/ff/9c/48/ff9c4808809368fbd58106140977708b.png',
-          position: {},
-          rotation: '45',
-          speed: 30,
-          size: {
-            'x': 5,
-            'y': 5
-          },
-          name: 'APPARITION',
-          level: 3,
-          perception: 15,
-          defense: {
-            ac: 15,
-            hp: 12,
-            fort: 15,
-            reflex: 12,
-            will: 13,
-          },
-          attacks: [
-            {'bonus': 14, 'numbOfDice': 1, 'damage': 6, 'range': 5, 'targets': 1,}
-          ]
-        },
-        mon2: {
-          id: 'mon2',
-          type: 1,
-          icon: 'https://s3.amazonaws.com/files.d20.io/marketplace/2222383/DSzCtKYufMLb9EinYYX2ug/med.png?1642080635715',
-          position: {},
-          rotation: '90deg',
-          speed: 30,
-          size: {
-            x: 3,
-            y: 3
-          },
-          name: 'GIANT CRAB',
-          level: 3,
-          perception: 12,
-          defense: {
-            ac: 15,
-            hp: 12,
-            fort: 15,
-            reflex: 12,
-            will: 13,
-          },
-          attacks: [
-            {'bonus': 14, 'numbOfDice': 1, 'damage': 6, 'range': 5, 'targets': 1,}
-          ]
-        },
+
       }
     },
-
+    unusednpcs : {
+      mon1: {
+        id: 'mon1',
+        type: 1,
+        icon: 'https://i.pinimg.com/originals/ff/9c/48/ff9c4808809368fbd58106140977708b.png',
+        position: {},
+        rotation: '45',
+        speed: 30,
+        size: {
+          'x': 5,
+          'y': 5
+        },
+        name: 'APPARITION',
+        level: 3,
+        perception: 15,
+        defense: {
+          ac: 15,
+          hp: 12,
+          fort: 15,
+          reflex: 12,
+          will: 13,
+        },
+        attacks: [
+          {'bonus': 2, 'numbOfDice': 1, 'damage': 4, 'range': 5, 'targets': 1,}
+        ]
+      },
+      mon2: {
+        id: 'mon2',
+        type: 1,
+        icon: 'https://s3.amazonaws.com/files.d20.io/marketplace/2222383/DSzCtKYufMLb9EinYYX2ug/med.png?1642080635715',
+        position: {},
+        rotation: '90deg',
+        speed: 30,
+        size: {
+          x: 3,
+          y: 3
+        },
+        name: 'GIANT CRAB',
+        level: 3,
+        perception: 12,
+        defense: {
+          ac: 15,
+          hp: 12,
+          fort: 15,
+          reflex: 12,
+          will: 13,
+        },
+        attacks: [
+          {'bonus': 2, 'numbOfDice': 1, 'damage': 4, 'range': 5, 'targets': 1,}
+        ]
+      },
+    }
   }),
   actions: {
     changetokenInfo(token) {

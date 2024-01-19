@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center" style="margin-top: 5rem;
+  <q-page class="flex flex-center" style="margin-top: 4rem;
     display: flex;
     row-gap: 3rem;
     flex-wrap: wrap;

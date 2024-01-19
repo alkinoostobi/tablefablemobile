@@ -56,23 +56,23 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.mons.mon1.id = this.stats.tokens.npcs.mon1.id;
-    this.mons.mon1.icon = this.stats.tokens.npcs.mon1.icon;
-    this.mons.mon1.speed = this.stats.tokens.npcs.mon1.speed;
-    this.mons.mon1.name = this.stats.tokens.npcs.mon1.name;
-    this.mons.mon1.level = this.stats.tokens.npcs.mon1.level;
-    this.mons.mon1.hp = this.stats.tokens.npcs.mon1.defense.hp;
-    this.mons.mon1.ac = this.stats.tokens.npcs.mon1.defense.ac;
-    this.mons.mon1.perc = this.stats.tokens.npcs.mon1.perception;
+    this.mons.mon1.id = this.stats.unusednpcs.mon1.id;
+    this.mons.mon1.icon = this.stats.unusednpcs.mon1.icon;
+    this.mons.mon1.speed = this.stats.unusednpcs.mon1.speed;
+    this.mons.mon1.name = this.stats.unusednpcs.mon1.name;
+    this.mons.mon1.level = this.stats.unusednpcs.mon1.level;
+    this.mons.mon1.hp = this.stats.unusednpcs.mon1.defense.hp;
+    this.mons.mon1.ac = this.stats.unusednpcs.mon1.defense.ac;
+    this.mons.mon1.perc = this.stats.unusednpcs.mon1.perception;
 
-    this.mons.mon2.id = this.stats.tokens.npcs.mon2.id;
-    this.mons.mon2.icon = this.stats.tokens.npcs.mon2.icon;
-    this.mons.mon2.speed = this.stats.tokens.npcs.mon2.speed;
-    this.mons.mon2.name = this.stats.tokens.npcs.mon2.name;
-    this.mons.mon2.level = this.stats.tokens.npcs.mon2.level;
-    this.mons.mon2.hp = this.stats.tokens.npcs.mon2.defense.hp;
-    this.mons.mon2.ac = this.stats.tokens.npcs.mon2.defense.ac;
-    this.mons.mon2.perc = this.stats.tokens.npcs.mon2.perception;
+    this.mons.mon2.id = this.stats.unusednpcs.mon2.id;
+    this.mons.mon2.icon = this.stats.unusednpcs.mon2.icon;
+    this.mons.mon2.speed = this.stats.unusednpcs.mon2.speed;
+    this.mons.mon2.name = this.stats.unusednpcs.mon2.name;
+    this.mons.mon2.level = this.stats.unusednpcs.mon2.level;
+    this.mons.mon2.hp = this.stats.unusednpcs.mon2.defense.hp;
+    this.mons.mon2.ac = this.stats.unusednpcs.mon2.defense.ac;
+    this.mons.mon2.perc = this.stats.unusednpcs.mon2.Perception;
   }
 })
 </script>

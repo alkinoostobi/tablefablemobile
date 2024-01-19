@@ -6,7 +6,7 @@
                          :text="skillProf" :backgroundcolor="skillColor"></inner-box-component>
     <inner-box-component :mode="'icon'" :icon-height="2" :icon-width="2" :position="'br'"
                          :backgroundcolor="skillDieColor"
-                         :icon="'die'" @clicked="rollmydice(skillScore)"
+                         :icon="'die'" @clicked="rollmydice()"
                          :icon-after-click="'shield'"></inner-box-component>
   </div>
 </template>
@@ -14,14 +14,16 @@
 <script>
 import innerBoxComponent from "components/innerBoxComponent.vue";
 import socket from "boot/socket";
-
+import { utilitiesStore } from "src/stores/utilities";
+const util = utilitiesStore();
 export default {
   name: 'boxComponentSkills',
   data() {
     return {
       innerBoxWidth: 100,
       anotherInnerBoxWidth: 200,
-      show_second: false
+      show_second: false,
+      util : util
     };
   },
   props: {
@@ -58,8 +60,8 @@ export default {
     test() {
       console.log('test');
     },
-    rollmydice(mod) {
-      socket.emit('skillroll', mod)
+    rollmydice() {
+      socket.emit('rolldie', this.util.playerselected);
     }
   }
 };

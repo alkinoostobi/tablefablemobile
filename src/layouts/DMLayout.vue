@@ -1,5 +1,4 @@
 <template>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <div>
     <div class="square">
       <div class="dm-menu-box">
@@ -21,6 +20,125 @@
         </p>
       </div>
     </div>
+    <section class="menu menu--circle">
+      <input type="checkbox" id="menu__active"/>
+      <label for="menu__active" class="menu__active">
+        <div class="menu__toggle">
+          <div class="icon">
+            <div class="hamburger"></div>
+          </div>
+        </div>
+        <input type="radio" name="arrow--up" id="degree--up-0"/>
+        <input type="radio" name="arrow--up" id="degree--up-1"/>
+        <input type="radio" name="arrow--up" id="degree--up-2"/>
+        <div class="menu__listings">
+          <ul class="circle">
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a class="button" @click="navigateToCharsPage"
+                     :class="{ 'active-menu': currentmenu === 'CHARACTERS' }"><img :src="util.icons.party"
+                                                                                   style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a class="button" @click="navigateToEquipmentPage"
+                     :class="{ 'active-menu': currentmenu === 'EQUIPMENT' }"><img :src="util.icons.equips"
+                                                                                  style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a
+                    href="https://steamuserimages-a.akamaihd.net/ugc/1817759587123704431/E329A7933735ACE37274B794702F5A72CB0275A8/?imw=268&imh=268&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                    class="button"><img :src="util.icons.wip" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a
+                    href="https://steamuserimages-a.akamaihd.net/ugc/1817759587123704431/E329A7933735ACE37274B794702F5A72CB0275A8/?imw=268&imh=268&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                    class="button"><img :src="util.icons.wip" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a
+                    href="https://steamuserimages-a.akamaihd.net/ugc/1817759587123704431/E329A7933735ACE37274B794702F5A72CB0275A8/?imw=268&imh=268&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                    class="button"><img :src="util.icons.wip" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><img :src="util.icons.wip" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a
+                    href="https://steamuserimages-a.akamaihd.net/ugc/1817759587123704431/E329A7933735ACE37274B794702F5A72CB0275A8/?imw=268&imh=268&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                    class="button"><img :src="util.icons.wip" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a
+                    href="https://steamuserimages-a.akamaihd.net/ugc/1817759587123704431/E329A7933735ACE37274B794702F5A72CB0275A8/?imw=268&imh=268&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                    class="button"><img :src="util.icons.wip" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a class="button" @click="navigateToNPCsPage"
+                     :class="{ 'active-menu': currentmenu === 'NPCs' }"><img :src="util.icons.monster"
+                                                                             style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a class="button" @click="navigateToScenesPage"
+                     :class="{ 'active-menu': currentmenu === 'SCENES' }"><img :src="util.icons.map" style="width:5rem"></a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="menu__arrow menu__arrow--top">
+          <ul>
+            <li>
+              <label for="degree--up-0">
+                <div class="arrow"></div>
+              </label>
+              <label for="degree--up-1">
+                <div class="arrow"></div>
+              </label>
+              <label for="degree--up-2">
+                <div class="arrow"></div>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </label>
+    </section>
     <q-layout view="lHh Lpr lFf">
       <q-page-container>
         <router-view/>
@@ -37,26 +155,34 @@ export default defineComponent({
   name: "DMLayout",
   data() {
     return {
-      currentmenu: "scenes",
+      currentmenu: "SCENES",
       util: utilitiesStore(),
     };
   },
   methods: {
-    /* navigateToScoresPage() {
-      this.updateCurrentMenu("SCENES");
-      this.router.push({path: "scenes"});
-    },
-    navigateToSkillsPage() {
-      this.updateCurrentMenu("CHARACTERS-NPCS");
-      this.router.push({path: "Characters-npcs"});
-    },
-    navigateToSavingsPage() {
-      this.updateCurrentMenu("EQUIPMENT");
-      this.router.push({path: "equipment"});
-    },
     updateCurrentMenu(menu) {
       this.currentmenu = menu;
-    },*/
+    },
+    navigateToScenesPage() {
+      this.updateCurrentMenu('SCENES');
+      this.$router.push({path: 'scenes'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
+    },
+    navigateToNPCsPage() {
+      this.updateCurrentMenu('NPCs');
+      this.$router.push({path: 'npcs'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
+    },
+    navigateToCharsPage() {
+      this.updateCurrentMenu('CHARACTERS');
+      this.$router.push({path: 'chars'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
+    },
+    navigateToEquipmentPage() {
+      this.updateCurrentMenu('EQUIPMENT');
+      this.$router.push({path: 'equipments'});
+      localStorage.setItem('lastSelectedMenu', this.currentmenu);
+    },
     exploremode() {
       socket.emit('exploremode');
     },
@@ -66,7 +192,11 @@ export default defineComponent({
     combatmode() {
       socket.emit('combatmode');
     },
+
   },
+  mounted() {
+    this.currentmenu = localStorage.getItem('lastSelectedMenu') || null;
+  }
 })
 ;
 </script>
@@ -192,7 +322,7 @@ export default defineComponent({
 .dm-menu-box {
   border-radius: 0 0 0 40px;
   position: absolute;
-  width: 13rem;
+  width: 10.3rem;
   height: 2.5rem;
   left: 60%;
   background: #6E441D;
@@ -200,19 +330,19 @@ export default defineComponent({
 
 .current-menu {
   color: #F6C99C;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-style: normal;
-  font-weight: 100;
   text-align: center;
-  line-height: 1.4;
+  font-weight: 100;
+  line-height: 1.9;
+  padding-inline-start: 1.7rem;
 }
 
-/*
 body {
   padding: 0;
   margin: 0;
-  background-color: #392338;
-  color: #fff;
+  background-color: black;
+  color: black;
 }
 
 body * {
@@ -230,7 +360,7 @@ body * {
   content: ' ';
   position: relative;
   width: 20px;
-  border: 2px solid #392338;
+  border: 2px solid #F6C99C;
   border-radius: 5px;
   transition: all 0.333333333333333s ease;
 }
@@ -238,14 +368,15 @@ body * {
 .hamburger:after,
 .hamburger:before {
   content: ' ';
-  position: relative;
+  position: absolute;
   left: 50%;
   width: 100%;
   border: 2px solid #F6C99C;
   border-radius: 5px;
   transform: translateX(-50%);
   transition-property: top, bottom, transform;
-  transition-duration: 1s, 1s, 0.25s;}
+  transition-duration: 1s, 1s, 0.25s;
+}
 
 .hamburger:after {
   top: -8px;
@@ -261,8 +392,8 @@ body * {
 
 .menu--circle {
   position: absolute;
+  top: 0%;
   z-index: 13;
-  top: 0;
   width: 243.33333333333334px;
   height: 243.33333333333334px;
   overflow: hidden;
@@ -336,8 +467,8 @@ body * {
 .arrow {
   width: 20px;
   height: 20px;
-  border-right: 6.666666666666667px solid #fff;
-  border-top: 6.666666666666667px solid #fff;
+  border-right: 6.666666666666667px solid #4C2B0D;
+  border-top: 6.666666666666667px solid #4C2B0D;
   border-radius: 3px;
   transition: border-color 0.3s;
   cursor: pointer;
@@ -350,14 +481,13 @@ body * {
 }
 
 .circle {
-  position: relative;
+  position: absolute;
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: white;
+  background-color: #fff;
   border-radius: 50%;
-  border: 6px solid #4C2B0D;
   transform: rotate(108deg);
   overflow: hidden;
   list-style: none;
@@ -370,6 +500,7 @@ body * {
   width: 50%;
   height: 50%;
   transform-origin: 0 100%;
+
 }
 
 .circle li .placeholder {
@@ -393,13 +524,15 @@ body * {
 
 .circle li .placeholder button {
   pointer-events: auto;
+
 }
 
 .circle li .placeholder .button {
-  font-size: 2.3em;
+  height: 50%;
+  width: 50%;
   background-color: transparent;
   border: none;
-  color: #392338;
+  color: black;
   cursor: pointer;
 }
 
@@ -462,6 +595,7 @@ body * {
 #menu__active:checked ~ label .menu__listings {
   transform: rotate(10deg) scale(1);
   transition: transform 1s;
+
 }
 
 #menu__active:checked ~ label .menu__toggle {
@@ -529,5 +663,6 @@ body * {
 
 #menu__active:checked ~ label #degree--up-1:checked ~ .menu__listings ~ .menu__arrow--top label[for="degree--up-2"] {
   display: block;
-}*/
+}
+
 </style>
